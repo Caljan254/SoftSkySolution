@@ -10,12 +10,20 @@ import { Label } from "@/components/ui/label";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact — SoftSkySolution LTD" },
-      { name: "description", content: "Get in touch with SoftSkySolution LTD. Free 30-minute scoping calls. Response within 24 hours." },
+      { title: "Contact SoftSkySolution LTD — Get in Touch" },
+      { name: "description", content: "Contact SoftSkySolution LTD. Call +254 112 199 055 or +254 762 095 235, or email softskysolution@gmail.com. Response within 24 hours." },
     ],
   }),
   component: Contact,
 });
+
+const contactItems = [
+  { icon: Mail, label: "Primary Email", value: "softskysolution@gmail.com", href: "mailto:softskysolution@gmail.com" },
+  { icon: Mail, label: "Support Email", value: "supportsoftskysolution@gmail.com", href: "mailto:supportsoftskysolution@gmail.com" },
+  { icon: Phone, label: "Phone", value: "+254 112 199 055", href: "tel:+254112199055" },
+  { icon: Phone, label: "Alternative Phone", value: "+254 762 095 235", href: "tel:+254762095235" },
+  { icon: MapPin, label: "Office", value: "Nairobi, Kenya" },
+];
 
 function Contact() {
   const [sent, setSent] = useState(false);
@@ -48,26 +56,19 @@ function Contact() {
           <div className="lg:col-span-2 space-y-6">
             <h2 className="text-2xl font-display font-bold">Reach us directly</h2>
             <p className="text-muted-foreground">
-              Prefer email or a call? We're available Monday–Friday, 9am–6pm EAT.
+              Prefer email or a phone call? We're available Monday–Saturday, 8am–8pm EAT.
             </p>
 
-            <div className="space-y-4 pt-4">
-              {[
-                { icon: Mail, label: "Email", value: "hello@softskysolution.com", href: "mailto:hello@softskysolution.com" },
-                { icon: Phone, label: "Phone", value: "+254 700 000 000", href: "tel:+254700000000" },
-                { icon: MapPin, label: "Office", value: "Westlands, Nairobi, Kenya" },
-              ].map((c) => (
-                <a
-                  key={c.label}
-                  href={c.href ?? "#"}
-                  className="flex items-start gap-4 p-4 rounded-xl bg-card/50 border border-border/50 hover:border-primary/50 transition-colors"
-                >
+            <div className="space-y-3 pt-4">
+              {contactItems.map((c) => (
+                <a key={c.label} href={c.href ?? "#"}
+                  className="flex items-start gap-4 p-4 rounded-xl bg-card/50 border border-border/50 hover:border-primary/50 transition-colors">
                   <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary shrink-0">
                     <c.icon className="h-5 w-5" />
                   </div>
-                  <div>
+                  <div className="min-w-0">
                     <div className="text-xs uppercase tracking-wider text-muted-foreground">{c.label}</div>
-                    <div className="font-medium">{c.value}</div>
+                    <div className="font-medium break-all">{c.value}</div>
                   </div>
                 </a>
               ))}
@@ -86,24 +87,24 @@ function Contact() {
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="name">Name</Label>
-                    <Input id="name" required placeholder="Jane Doe" />
+                    <Input id="name" required placeholder="Your full name" />
                   </div>
                   <div className="space-y-2">
                     <Label htmlFor="email">Email</Label>
-                    <Input id="email" type="email" required placeholder="jane@company.com" />
+                    <Input id="email" type="email" required placeholder="you@company.com" />
                   </div>
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="company">Company</Label>
-                  <Input id="company" placeholder="Acme Inc." />
+                  <Label htmlFor="company">Company / Institution</Label>
+                  <Input id="company" placeholder="Acme Inc. or institution name" />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="budget">Project budget (USD)</Label>
+                  <Label htmlFor="budget">Project budget (KES)</Label>
                   <select id="budget" className="flex h-10 w-full rounded-md border border-input bg-input px-3 py-2 text-sm">
-                    <option>Under $10k</option>
-                    <option>$10k – $50k</option>
-                    <option>$50k – $150k</option>
-                    <option>$150k+</option>
+                    <option>Under 100,000</option>
+                    <option>100,000 – 500,000</option>
+                    <option>500,000 – 2,000,000</option>
+                    <option>2,000,000+</option>
                     <option>Not sure yet</option>
                   </select>
                 </div>
