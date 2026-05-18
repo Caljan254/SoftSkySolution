@@ -106,7 +106,7 @@ function HeroSlider() {
   return (
     <section className="w-full pt-4 pb-2 relative z-10 animate-fade-up">
       <div className="relative overflow-hidden border-y border-primary/20 shadow-glow bg-slate-950/40">
-        <div className="relative aspect-[16/8] md:aspect-[21/9] lg:aspect-[24/9]">
+        <div className="relative aspect-[3/4] sm:aspect-[4/3] md:aspect-[16/10] lg:aspect-[16/9] max-h-[80vh]">
           {slides.map((s, idx) => (
             <div
               key={idx}
