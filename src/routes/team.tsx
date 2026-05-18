@@ -9,8 +9,8 @@ import caleb3 from "@/assets/caleb-3.png";
 export const Route = createFileRoute("/team")({
   head: () => ({
     meta: [
-      { title: "Our Team — SoftSkySolution LTD" },
-      { name: "description", content: "Meet Caleb Mumo Kisangau — Founder & CEO of SoftSkySolution LTD, leading the company's vision and engineering." },
+      { title: "About Me — SoftSkySolution" },
+      { name: "description", content: "Meet Caleb Kisangau — Founder of SoftSkySolution, leading the business vision and engineering." },
     ],
   }),
   component: Team,
@@ -29,45 +29,45 @@ const socials = [
 function Team() {
   return (
     <>
-      <section className="relative py-24 bg-gradient-hero overflow-hidden">
+      <section className="relative py-16 bg-gradient-hero overflow-hidden">
         <div className="absolute inset-0 starfield opacity-50" />
         <div className="relative container mx-auto px-4 md:px-6 text-center max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-6">
-            Leadership
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-4">
+            About Me
           </div>
-          <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
+          <h1 className="text-5xl md:text-6xl font-display font-bold mb-4">
             The mind behind <span className="text-gradient-primary">SoftSkySolution</span>
           </h1>
           <p className="text-lg text-muted-foreground">
-            SoftSkySolution LTD is founder-led — every project benefits from direct engineering oversight and a personal commitment to quality.
+            SoftSkySolution is founder-led. Every project benefits from direct engineering oversight and a personal commitment to quality.
           </p>
         </div>
       </section>
 
-      <section className="container mx-auto px-4 md:px-6 py-24">
+      <section className="container mx-auto px-4 md:px-6 py-16">
         <div className="max-w-6xl mx-auto">
           <Card className="overflow-hidden bg-card/50 border-border/50">
             <div className="grid lg:grid-cols-5 gap-0">
               <div className="lg:col-span-2 relative aspect-square lg:aspect-auto">
-                <img src={caleb1} alt="Caleb Mumo Kisangau" className="absolute inset-0 h-full w-full object-cover" />
+                <img src={caleb1} alt="Caleb Kisangau" className="absolute inset-0 h-full w-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-background/60 via-transparent to-transparent" />
               </div>
-              <div className="lg:col-span-3 p-8 md:p-12 space-y-5">
+              <div className="lg:col-span-3 p-6 md:p-10 space-y-4">
                 <div>
-                  <h2 className="text-3xl md:text-4xl font-display font-bold">Caleb Mumo Kisangau</h2>
-                  <p className="text-primary font-semibold mt-1">Founder & Chief Executive Officer</p>
+                  <h2 className="text-3xl md:text-4xl font-display font-bold">Caleb Kisangau</h2>
+                  <p className="text-primary font-semibold mt-1">Founder</p>
                 </div>
                 <p className="text-muted-foreground leading-relaxed">
-                  Caleb is the founder and CEO of SoftSkySolution LTD — a passionate full-stack software engineer, innovator and entrepreneur dedicated to building technology that solves real problems for African institutions and businesses. He combines deep engineering skill with a strong sense of mission: to make modern, secure, world-class software accessible to organizations of every size.
+                  Caleb is the founder of SoftSkySolution, a passionate full-stack software engineer, innovator and entrepreneur dedicated to building technology that solves real problems for African institutions and businesses. He combines deep engineering skill with a strong sense of mission: to make modern, secure, world-class software accessible to organizations of every size.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
                   His work spans institutional websites, learning management systems, financial systems, customer feedback platforms, online marketplaces, donation platforms and ICT support services. He has personally led the delivery of projects for universities, colleges, religious organizations and political institutions across Kenya.
                 </p>
                 <p className="text-muted-foreground leading-relaxed">
-                  Caleb is a recognized student innovator, a confident public speaker, and a hands-on engineer who still ships code daily. He believes in transparent communication, founder-led delivery and long-term partnership with every client.
+                  Caleb is a recognized innovator, a confident communicator, and a hands-on engineer who still ships code daily. He believes in transparent communication, founder-led delivery and long-term partnership with every client.
                 </p>
 
-                <div className="flex flex-wrap gap-3 pt-3">
+                <div className="flex flex-wrap gap-3 pt-2">
                   <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
                     <Link to="/contact">Get in Touch <ArrowRight className="ml-2 h-4 w-4" /></Link>
                   </Button>
@@ -79,7 +79,7 @@ function Team() {
                   </a>
                 </div>
 
-                <div className="flex flex-wrap gap-2 pt-4 border-t border-border/40">
+                <div className="flex flex-wrap gap-2 pt-3 border-t border-border/40">
                   {socials.map(({ Icon, href, label }) => (
                     <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                       className="flex h-9 w-9 items-center justify-center rounded-lg bg-secondary hover:bg-primary hover:text-primary-foreground transition-colors">
@@ -91,12 +91,12 @@ function Team() {
             </div>
           </Card>
 
-          <div className="grid sm:grid-cols-2 gap-6 mt-10">
+          <div className="grid sm:grid-cols-2 gap-5 mt-8">
             <Card className="overflow-hidden border-border/50">
-              <img src={caleb2} alt="Caleb Mumo Kisangau portrait" className="w-full h-80 object-cover" />
+              <img src={caleb2} alt="Caleb Kisangau portrait" className="w-full h-72 object-cover" />
             </Card>
             <Card className="overflow-hidden border-border/50">
-              <img src={caleb3} alt="Caleb presenting at innovation event" className="w-full h-80 object-cover" />
+              <img src={caleb3} alt="Caleb presenting at innovation event" className="w-full h-72 object-cover" />
             </Card>
           </div>
         </div>

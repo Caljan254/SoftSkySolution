@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — SoftSkySolution LTD" },
+      { title: "Services — SoftSkySolution" },
       { name: "description", content: "Full-stack software engineering: web, mobile, cloud, AI, cybersecurity, branding and digital strategy." },
     ],
   }),
@@ -21,12 +21,12 @@ const services = [
     icon: Code2,
     title: "Web Development",
     desc: "Production-grade web platforms with React, Next.js, TanStack Start and modern tooling.",
-    features: ["SSR & edge rendering", "Type-safe full-stack", "Real-time features", "SEO & performance"],
+    features: ["SSR and edge rendering", "Type-safe full-stack", "Real-time features", "SEO and performance"],
   },
   {
     icon: Smartphone,
     title: "Mobile App Development",
-    desc: "Native-feeling iOS and Android apps with React Native, Expo and Swift/Kotlin where needed.",
+    desc: "Native-feeling iOS and Android apps with React Native, Expo and Swift or Kotlin where needed.",
     features: ["Cross-platform", "Offline-first", "Push notifications", "App Store launch"],
   },
   {
@@ -76,37 +76,37 @@ const services = [
 function Services() {
   return (
     <>
-      <section className="relative py-24 bg-gradient-hero overflow-hidden">
+      <section className="relative py-16 bg-gradient-hero overflow-hidden">
         <div className="absolute inset-0 starfield opacity-50" />
         <div className="relative container mx-auto px-4 md:px-6 text-center max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-6">
-            Our Services
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-4">
+            My Services
           </div>
-          <h1 className="text-5xl md:text-6xl font-display font-bold mb-6">
+          <h1 className="text-5xl md:text-6xl font-display font-bold mb-4">
             Every <span className="text-gradient-primary">discipline</span> your product needs
           </h1>
           <p className="text-lg text-muted-foreground">
-            Nine specialized practices, one accountable team. Engage us for a single sprint or a multi-year partnership.
+            Nine specialized practices from one accountable engineer. Engage me for a single sprint or a long-term partnership.
           </p>
         </div>
       </section>
 
-      <section className="container mx-auto px-4 md:px-6 py-24">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <section className="container mx-auto px-4 md:px-6 py-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {services.map((s) => (
             <Card
               key={s.title}
-              className="group p-8 bg-card/50 border-border/50 hover:border-primary/50 transition-all hover:shadow-glow hover:-translate-y-1 duration-300 space-y-4"
+              className="group p-6 bg-card/50 border-border/50 hover:border-primary/50 transition-all hover:shadow-glow hover:-translate-y-1 duration-300 space-y-3"
             >
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                <s.icon className="h-7 w-7" />
+              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                <s.icon className="h-6 w-6" />
               </div>
-              <h3 className="text-xl font-display font-semibold">{s.title}</h3>
+              <h3 className="text-lg font-display font-semibold">{s.title}</h3>
               <p className="text-muted-foreground text-sm">{s.desc}</p>
-              <ul className="space-y-2 pt-2">
+              <ul className="space-y-1.5 pt-1">
                 {s.features.map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm">
-                    <CheckCircle2 className="h-4 w-4 text-primary shrink-0" />
+                    <CheckCircle2 className="h-3.5 w-3.5 text-primary shrink-0" />
                     {f}
                   </li>
                 ))}
@@ -116,16 +116,16 @@ function Services() {
         </div>
       </section>
 
-      <section className="container mx-auto px-4 md:px-6 pb-24">
-        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/20 via-card to-accent/10 border border-primary/30 p-12 md:p-16 text-center">
-          <div className="relative space-y-6 max-w-2xl mx-auto">
-            <h2 className="text-4xl font-display font-bold">
+      <section className="container mx-auto px-4 md:px-6 pb-16">
+        <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/20 via-card to-accent/10 border border-primary/30 p-10 md:p-12 text-center">
+          <div className="relative space-y-4 max-w-2xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-display font-bold">
               Not sure which service fits?
             </h2>
             <p className="text-lg text-muted-foreground">
-              Book a free 30-minute scoping call. We'll map your idea to a concrete plan.
+              Book a free 30 minute scoping call. I will help map your idea to a concrete plan.
             </p>
-            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-glow h-12 px-8">
+            <Button asChild size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-glow h-11 px-7">
               <Link to="/contact">
                 Book Free Call <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
