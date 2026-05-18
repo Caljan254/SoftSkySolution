@@ -14,6 +14,16 @@ import caleb3 from "@/assets/caleb-3.png";
 import gallery1 from "@/assets/gallery-1.png";
 import gallery2 from "@/assets/gallery-2.png";
 import gallery3 from "@/assets/gallery-3.png";
+import flyerWeb from "@/assets/flyer-web.jpg";
+import flyerMobile from "@/assets/flyer-mobile.jpg";
+import flyerAi from "@/assets/flyer-ai.jpg";
+import flyerCloud from "@/assets/flyer-cloud.jpg";
+import flyerSecurity from "@/assets/flyer-security.jpg";
+import flyerEcommerce from "@/assets/flyer-ecommerce.jpg";
+import flyerLms from "@/assets/flyer-lms.jpg";
+import flyerFinance from "@/assets/flyer-finance.jpg";
+import flyerDesign from "@/assets/flyer-design.jpg";
+import flyerIct from "@/assets/flyer-ict.jpg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -42,31 +52,21 @@ const stats = [
 ];
 
 const slides = [
-  {
-    img: gallery1,
-    title: "Innovation in Action",
-    desc: "Presenting SoftSkySolution's innovative tech solutions at national innovation forums.",
-  },
-  {
-    img: gallery3,
-    title: "Award-Winning Excellence",
-    desc: "Recognized for outstanding contribution to digital transformation and student innovation.",
-  },
-  {
-    img: caleb3,
-    title: "Visionary Leadership",
-    desc: "Driven by purpose, building software that uplifts institutions and communities.",
-  },
-  {
-    img: gallery2,
-    title: "Collaborative Culture",
-    desc: "Thriving in partnership, engaging clients, students and stakeholders as one team.",
-  },
-  {
-    img: heroBg,
-    title: "Engineered for Scale",
-    desc: "From classrooms to enterprises, robust systems built to grow with you.",
-  },
+  { img: flyerWeb, title: "Web Development", desc: "Modern, fast, scalable websites & institutional portals." },
+  { img: flyerMobile, title: "Mobile App Development", desc: "Android & iOS apps engineered to scale with your users." },
+  { img: flyerAi, title: "AI & Automation", desc: "Intelligent chatbots, LLM solutions and smart workflows." },
+  { img: flyerCloud, title: "Cloud & DevOps", desc: "AWS, GCP and Cloudflare — deploy, scale and monitor with confidence." },
+  { img: flyerSecurity, title: "Cybersecurity", desc: "Security audits, hardening and zero-trust architecture." },
+  { img: flyerEcommerce, title: "E-Commerce & Marketplaces", desc: "Online stores, multi-vendor marketplaces and M-Pesa integration." },
+  { img: flyerLms, title: "LMS & EdTech (Edusly)", desc: "Smart learning management systems for schools and colleges." },
+  { img: flyerFinance, title: "Finance Hub", desc: "Secure institutional finance, billing and payments systems." },
+  { img: flyerDesign, title: "UI / UX Design", desc: "Beautiful interfaces, brand systems and clickable prototypes." },
+  { img: flyerIct, title: "ICT Consulting & Support", desc: "Strategy, support, training and digital transformation." },
+  { img: gallery1, title: "Innovation in Action", desc: "Presenting SoftSkySolution at national innovation forums." },
+  { img: gallery3, title: "Award-Winning Excellence", desc: "Recognized for student innovation and digital transformation." },
+  { img: caleb3, title: "Visionary Leadership", desc: "Software that uplifts institutions and communities." },
+  { img: gallery2, title: "Collaborative Culture", desc: "We thrive in partnership with our clients and stakeholders." },
+  { img: heroBg, title: "Engineered for Scale", desc: "Robust systems built to grow with you." },
 ];
 
 function useCounter(target: number, duration = 1800) {
