@@ -27,7 +27,7 @@ export const Route = createFileRoute("/")({
 
 const services = [
   { icon: Code2, title: "Web Development", desc: "Modern, performant web apps and institutional portals built with React, Next.js and TanStack." },
-  { icon: Smartphone, title: "Mobile Apps", desc: "Cross-platform Android & iOS apps that delight users and drive daily engagement." },
+  { icon: Smartphone, title: "Mobile Apps", desc: "Cross-platform Android and iOS apps that delight users and drive daily engagement." },
   { icon: Cloud, title: "Cloud & DevOps", desc: "Scalable cloud infrastructure on AWS, GCP and Cloudflare with full CI/CD pipelines." },
   { icon: Brain, title: "AI & Automation", desc: "LLM-powered features, intelligent chatbots, and process automation that save time." },
   { icon: Shield, title: "Cybersecurity", desc: "Security hardening, audits and zero-trust architecture to protect your business." },
@@ -55,17 +55,17 @@ const slides = [
   {
     img: caleb3,
     title: "Visionary Leadership",
-    desc: "Driven by purpose — building software that uplifts institutions and communities.",
+    desc: "Driven by purpose, building software that uplifts institutions and communities.",
   },
   {
     img: gallery2,
     title: "Collaborative Culture",
-    desc: "We thrive in partnership — engaging clients, students and stakeholders as one team.",
+    desc: "Thriving in partnership, engaging clients, students and stakeholders as one team.",
   },
   {
     img: heroBg,
     title: "Engineered for Scale",
-    desc: "From classrooms to enterprises — robust systems built to grow with you.",
+    desc: "From classrooms to enterprises, robust systems built to grow with you.",
   },
 ];
 
@@ -104,37 +104,46 @@ function HeroSlider() {
   const next = () => setI((p) => (p + 1) % slides.length);
 
   return (
-    <section className="container mx-auto px-4 md:px-6 -mt-12 relative z-10">
-      <div className="relative overflow-hidden rounded-3xl border border-primary/30 shadow-glow bg-card/60">
-        <div className="relative aspect-[16/8] md:aspect-[16/6]">
+    <section className="w-full pt-4 pb-2 relative z-10 animate-fade-up">
+      <div className="relative overflow-hidden border-y border-primary/20 shadow-glow bg-slate-950/40">
+        <div className="relative aspect-[16/8] md:aspect-[21/9] lg:aspect-[24/9]">
           {slides.map((s, idx) => (
             <div
               key={idx}
               className={`absolute inset-0 transition-opacity duration-1000 ${idx === i ? "opacity-100" : "opacity-0 pointer-events-none"}`}
             >
-              <img src={s.img} alt={s.title} className="h-full w-full object-cover" />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8 max-w-2xl">
-                <h3 className="text-2xl md:text-3xl font-display font-bold mb-1">{s.title}</h3>
-                <p className="text-muted-foreground md:text-base">{s.desc}</p>
+              {/* Beautiful ambient background matching slide colors */}
+              <img src={s.img} alt="" className="absolute inset-0 h-full w-full object-cover blur-3xl opacity-40 scale-110" />
+              
+              {/* Crisp contained foreground image (seen 100% fully, z-10) */}
+              <div className="absolute inset-0 flex items-center justify-center p-4 md:p-6 lg:p-8">
+                <img src={s.img} alt={s.title} className="max-h-full max-w-full object-contain rounded-2xl shadow-2xl relative z-10 border border-white/5" />
+              </div>
+              
+              {/* Elegant glassmorphic text badge for 100% text legibility without darkening images */}
+              <div className="absolute bottom-4 left-4 right-4 z-30 md:bottom-8 md:left-8 max-w-xs sm:max-w-md md:max-w-lg lg:max-w-xl">
+                <div className="bg-slate-950/75 backdrop-blur-md border border-white/10 p-4 md:p-6 rounded-2xl shadow-lg space-y-1.5">
+                  <h3 className="text-lg md:text-2xl font-display font-bold text-white leading-tight drop-shadow-sm">{s.title}</h3>
+                  <p className="text-gray-200 text-xs md:text-sm leading-relaxed drop-shadow-sm">{s.desc}</p>
+                </div>
               </div>
             </div>
           ))}
         </div>
 
         <button onClick={prev} aria-label="Previous slide"
-          className="absolute left-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
-          <ChevronLeft className="h-4 w-4" />
+          className="absolute left-4 top-1/2 -translate-y-1/2 z-30 h-10 w-10 md:h-12 md:w-12 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+          <ChevronLeft className="h-5 w-5" />
         </button>
         <button onClick={next} aria-label="Next slide"
-          className="absolute right-3 top-1/2 -translate-y-1/2 h-9 w-9 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors">
-          <ChevronRight className="h-4 w-4" />
+          className="absolute right-4 top-1/2 -translate-y-1/2 z-30 h-10 w-10 md:h-12 md:w-12 rounded-full glass flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+          <ChevronRight className="h-5 w-5" />
         </button>
 
-        <div className="absolute bottom-3 right-6 flex gap-2">
+        <div className="absolute bottom-4 right-6 md:right-12 z-30 flex gap-2">
           {slides.map((_, idx) => (
             <button key={idx} onClick={() => setI(idx)} aria-label={`Go to slide ${idx + 1}`}
-              className={`h-1.5 rounded-full transition-all ${idx === i ? "w-6 bg-primary" : "w-1.5 bg-white/40 hover:bg-white/70"}`} />
+              className={`h-2 rounded-full transition-all ${idx === i ? "w-8 bg-primary" : "w-2 bg-white/40 hover:bg-white/70"}`} />
           ))}
         </div>
       </div>
@@ -145,12 +154,15 @@ function HeroSlider() {
 function Home() {
   return (
     <>
-      {/* HERO */}
-      <section className="relative overflow-hidden">
+      {/* SLIDING IMAGES AT THE TOP */}
+      <HeroSlider />
+
+      {/* HERO SECTION */}
+      <section className="relative overflow-hidden pt-4 pb-16">
         <div className="absolute inset-0 starfield opacity-60"
           style={{ backgroundImage: `url(${heroBg})`, backgroundSize: "cover", backgroundPosition: "center" }} />
         <div className="absolute inset-0 bg-gradient-hero opacity-90" />
-        <div className="relative container mx-auto px-4 md:px-6 py-20 md:py-24">
+        <div className="relative container mx-auto px-4 md:px-6 py-12 md:py-16">
           <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-up">
             <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium">
               <span className="relative flex h-2 w-2">
@@ -185,14 +197,11 @@ function Home() {
         </div>
       </section>
 
-      {/* SLIDING IMAGES */}
-      <HeroSlider />
-
       {/* ABOUT TEASER */}
       <section className="container mx-auto px-4 md:px-6 py-16">
         <div className="grid lg:grid-cols-2 gap-10 items-center">
-          <div className="relative rounded-3xl overflow-hidden border border-border/50 aspect-[4/3] max-w-md mx-auto lg:mx-0">
-            <img src={calebImage} alt="Caleb Kisangau" className="h-full w-full object-cover" />
+          <div className="relative rounded-3xl overflow-hidden border border-border/50 aspect-[4/3] max-w-md mx-auto lg:mx-0 bg-slate-900/10 dark:bg-slate-950/40">
+            <img src={calebImage} alt="Caleb Kisangau" className="h-full w-full object-contain" />
             <div className="absolute inset-0 bg-gradient-to-tr from-primary/30 via-transparent to-transparent" />
           </div>
           <div className="space-y-4">
@@ -215,13 +224,13 @@ function Home() {
         </div>
       </section>
 
-      {/* CEO SECTION */}
+      {/* FOUNDER SECTION */}
       <section className="bg-card/30 border-y border-border/40 py-16">
         <div className="container mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-5 gap-10 items-center max-w-6xl mx-auto">
             <div className="lg:col-span-2 relative">
-              <div className="relative rounded-3xl overflow-hidden border border-primary/40 shadow-glow aspect-[3/4] max-w-sm mx-auto">
-                <img src={caleb1} alt="Caleb Kisangau" className="h-full w-full object-cover" />
+              <div className="relative rounded-3xl overflow-hidden border border-primary/40 shadow-glow aspect-[3/4] max-w-sm mx-auto bg-slate-900/10 dark:bg-slate-950/40">
+                <img src={caleb1} alt="Caleb Kisangau" className="h-full w-full object-contain" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
               </div>
               <div className="absolute -bottom-3 -right-3 h-20 w-20 rounded-2xl bg-primary/20 border border-primary/40 backdrop-blur hidden md:flex items-center justify-center">
@@ -361,7 +370,7 @@ function Home() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CALL TO ACTION */}
       <section className="container mx-auto px-4 md:px-6 pb-16">
         <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-primary/20 via-card to-accent/10 border border-primary/30 p-10 md:p-12 text-center">
           <div className="absolute inset-0 starfield opacity-30" />

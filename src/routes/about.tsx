@@ -46,10 +46,12 @@ function About() {
             <img
               src={calebImage}
               alt="Caleb Kisangau"
-              width={400}
-              height={400}
-              loading="lazy"
-              className="relative rounded-2xl shadow-card w-64 h-auto object-cover"
+              className="relative rounded-2xl shadow-card"
+              style={{
+                width: "640px",
+                height: "416px",
+                objectFit: "cover",
+              }}
             />
           </div>
           <div className="space-y-4">

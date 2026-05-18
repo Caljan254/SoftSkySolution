@@ -48,9 +48,9 @@ function Gallery() {
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {images.map((img) => (
             <Card key={img.title} className="group overflow-hidden bg-card/50 border-border/50 hover:border-primary/50 transition-all hover:-translate-y-1 duration-300">
-              <div className="relative aspect-[4/3] overflow-hidden">
+              <div className="relative aspect-[4/3] overflow-hidden bg-slate-900/10 dark:bg-slate-950/40">
                 <img src={img.src} alt={img.title}
-                  className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                  className="absolute inset-0 h-full w-full object-contain group-hover:scale-105 transition-transform duration-500" />
               </div>
               <div className="p-4 space-y-1">
                 <h3 className="font-display font-semibold text-base">{img.title}</h3>

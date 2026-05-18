@@ -48,8 +48,8 @@ function Team() {
         <div className="max-w-6xl mx-auto">
           <Card className="overflow-hidden bg-card/50 border-border/50">
             <div className="grid lg:grid-cols-5 gap-0">
-              <div className="lg:col-span-2 relative aspect-square lg:aspect-auto">
-                <img src={caleb1} alt="Caleb Kisangau" className="absolute inset-0 h-full w-full object-cover" />
+              <div className="lg:col-span-2 relative aspect-square lg:aspect-auto bg-slate-900/10 dark:bg-slate-950/40">
+                <img src={caleb1} alt="Caleb Kisangau" className="absolute inset-0 h-full w-full object-contain" />
                 <div className="absolute inset-0 bg-gradient-to-tr from-background/60 via-transparent to-transparent" />
               </div>
               <div className="lg:col-span-3 p-6 md:p-10 space-y-4">
@@ -92,11 +92,11 @@ function Team() {
           </Card>
 
           <div className="grid sm:grid-cols-2 gap-5 mt-8">
-            <Card className="overflow-hidden border-border/50">
-              <img src={caleb2} alt="Caleb Kisangau portrait" className="w-full h-72 object-cover" />
+            <Card className="overflow-hidden border-border/50 bg-slate-900/10 dark:bg-slate-950/40">
+              <img src={caleb2} alt="Caleb Kisangau portrait" className="w-full h-72 object-contain" />
             </Card>
-            <Card className="overflow-hidden border-border/50">
-              <img src={caleb3} alt="Caleb presenting at innovation event" className="w-full h-72 object-cover" />
+            <Card className="overflow-hidden border-border/50 bg-slate-900/10 dark:bg-slate-950/40">
+              <img src={caleb3} alt="Caleb presenting at innovation event" className="w-full h-72 object-contain" />
             </Card>
           </div>
         </div>
