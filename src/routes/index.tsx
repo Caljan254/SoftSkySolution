@@ -254,7 +254,7 @@ function Home() {
               </p>
               <div className="flex flex-wrap gap-3 pt-2">
                 <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
-                  <Link to="/team">Learn More About Me <ArrowRight className="ml-2 h-4 w-4" /></Link>
+                  <Link to="/about">Learn More About Me <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
                 <Button asChild variant="outline" className="border-primary/40 hover:bg-primary/10">
                   <Link to="/contact">Work With Me</Link>
