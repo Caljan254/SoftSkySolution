@@ -70,7 +70,6 @@ export function Footer() {
                 { to: "/solutions", label: "Solutions" },
                 { to: "/why-us", label: "Why Us" },
                 { to: "/portfolio", label: "Portfolio" },
-                { to: "/testimonials", label: "Testimonials" },
                 { to: "/gallery", label: "Gallery" },
                 { to: "/training", label: "Training" },
                 { to: "/blog", label: "Insights" },
