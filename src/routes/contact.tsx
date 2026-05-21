@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
+import { getEmailLink } from "@/lib/utils";
 
 const WhatsAppIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg viewBox="0 0 24 24" fill="currentColor" className={props.className}>
@@ -30,8 +31,8 @@ export const Route = createFileRoute("/contact")({
 
 const contactItems = [
   { icon: WhatsAppIcon, label: "WhatsApp", value: "Chat Live 24/7", href: "https://wa.me/254112199055" },
-  { icon: Mail, label: "Primary Email", value: "softskysolution@gmail.com", href: "https://mail.google.com/mail/?view=cm&fs=1&to=softskysolution@gmail.com" },
-  { icon: Mail, label: "Support Email", value: "supportsoftskysolution@gmail.com", href: "https://mail.google.com/mail/?view=cm&fs=1&to=supportsoftskysolution@gmail.com" },
+  { icon: Mail, label: "Primary Email", value: "softskysolution@gmail.com", href: "mailto:softskysolution@gmail.com" },
+  { icon: Mail, label: "Support Email", value: "supportsoftskysolution@gmail.com", href: "mailto:supportsoftskysolution@gmail.com" },
   { icon: Phone, label: "Phone", value: "+254 112 199 055", href: "tel:+254112199055" },
   { icon: Phone, label: "Alternative Phone", value: "+254 762 095 235", href: "tel:+254762095235" },
   { icon: MapPin, label: "Location", value: "Nairobi, Kenya", href: undefined },
@@ -52,15 +53,13 @@ function Contact() {
   });
 
   const buildGmailUrl = () => {
-    const subject = encodeURIComponent(`Quote Request: ${service || "General Inquiry"}`);
-    const body = encodeURIComponent(
-      `Name: ${quoteForm.name || "Not provided"}\n` +
+    const subject = `Quote Request: ${service || "General Inquiry"}`;
+    const body = `Name: ${quoteForm.name || "Not provided"}\n` +
       `Email: ${quoteForm.email || "Not provided"}\n` +
       `Company/Institution: ${quoteForm.company || "Not provided"}\n` +
       `Project Budget: ${quoteForm.budget}\n\n` +
-      `Message:\n${quoteForm.message || "No details yet."}`
-    );
-    return `https://mail.google.com/mail/?view=cm&fs=1&to=softskysolution@gmail.com&su=${subject}&body=${body}`;
+      `Message:\n${quoteForm.message || "No details yet."}`;
+    return getEmailLink("softskysolution@gmail.com", subject, body);
   };
 
   const buildWhatsAppUrl = () => {
@@ -125,7 +124,7 @@ function Contact() {
           <div className="text-center mb-6">
             <h2 className="text-2xl font-display font-bold mb-2">Request a Quote Instantly</h2>
             <p className="text-muted-foreground text-sm">
-              Pick the channel most convenient for you — WhatsApp for a quick chat, or Gmail for a formal email.
+              Pick the channel most convenient for you: WhatsApp for a quick chat, or Gmail for a formal email.
             </p>
           </div>
 
@@ -180,46 +179,6 @@ function Contact() {
               </a>
             </Card>
           </div>
-
-          {/* Optional pre-fill fields */}
-          <Card className="p-5 bg-card/30 border-border/50">
-            <p className="text-xs text-muted-foreground font-medium mb-3 uppercase tracking-wider">
-              Optional: Fill in your details to pre-fill the buttons above ↑
-            </p>
-            <div className="grid sm:grid-cols-2 gap-3">
-              <div className="space-y-1">
-                <Label htmlFor="q-name" className="text-xs">Your Name</Label>
-                <Input id="q-name" placeholder="Full name" value={quoteForm.name}
-                  onChange={e => setQuoteForm({ ...quoteForm, name: e.target.value })} />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="q-email" className="text-xs">Your Email</Label>
-                <Input id="q-email" type="email" placeholder="your@email.com" value={quoteForm.email}
-                  onChange={e => setQuoteForm({ ...quoteForm, email: e.target.value })} />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="q-company" className="text-xs">Company (optional)</Label>
-                <Input id="q-company" placeholder="Your company" value={quoteForm.company}
-                  onChange={e => setQuoteForm({ ...quoteForm, company: e.target.value })} />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="q-budget" className="text-xs">Budget (KES)</Label>
-                <select id="q-budget" className="flex h-10 w-full rounded-md border border-input bg-input px-3 py-2 text-sm"
-                  value={quoteForm.budget} onChange={e => setQuoteForm({ ...quoteForm, budget: e.target.value })}>
-                  <option>Under 100,000</option>
-                  <option>100,000 to 500,000</option>
-                  <option>500,000 to 2,000,000</option>
-                  <option>2,000,000+</option>
-                  <option>Not sure yet</option>
-                </select>
-              </div>
-            </div>
-            <div className="space-y-1 mt-3">
-              <Label htmlFor="q-message" className="text-xs">Your Message / Project Description</Label>
-              <Textarea id="q-message" rows={3} placeholder="Your Message / Project Description"
-                value={quoteForm.message} onChange={e => setQuoteForm({ ...quoteForm, message: e.target.value })} />
-            </div>
-          </Card>
         </div>
       </section>
 
@@ -228,120 +187,45 @@ function Contact() {
         <div className="grid lg:grid-cols-5 gap-8 max-w-6xl mx-auto">
 
           {/* Contact info */}
-          <div className="lg:col-span-2 space-y-5">
-            <h2 className="text-2xl font-display font-bold">Reach us directly</h2>
+          <div className="lg:col-span-5 space-y-5 max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-display font-bold">Reach us directly</h2>
             <p className="text-muted-foreground">
               Available 24/7 every day. We give feedback immediately.
             </p>
-            <div className="space-y-2 pt-2">
+            <div className="grid sm:grid-cols-2 gap-4 pt-4 text-left">
               {contactItems.map((c) => {
-                const isExternal = c.href && (c.href.startsWith("http") || c.href.startsWith("tel"));
-                const El = c.href ? "a" : "div";
+                const href = c.label === "Primary Email" 
+                  ? getEmailLink("softskysolution@gmail.com")
+                  : c.label === "Support Email"
+                  ? getEmailLink("supportsoftskysolution@gmail.com")
+                  : c.href;
+                const isExternal = href && (href.startsWith("http") || href.startsWith("tel"));
+                const El = href ? "a" : "div";
                 return (
                   <El
                     key={c.label}
-                    {...(c.href ? { href: c.href } : {})}
-                    {...(isExternal && c.href?.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className={`flex items-start gap-4 p-4 rounded-xl bg-card/50 border transition-all duration-300 ${
+                    {...(href ? { href } : {})}
+                    {...(isExternal && href.startsWith("http") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    className={`flex items-start gap-4 p-5 rounded-xl bg-card/50 border transition-all duration-300 ${
                       c.label === "WhatsApp"
                         ? "border-green-500/25 hover:border-green-500/60 hover:shadow-green-500/5 hover:shadow-lg bg-green-500/[0.03]"
                         : "border-border/50 hover:border-primary/50"
                     }`}
                   >
-                    <div className={`flex h-10 w-10 items-center justify-center rounded-lg shrink-0 ${
+                    <div className={`flex h-12 w-12 items-center justify-center rounded-lg shrink-0 ${
                       c.label === "WhatsApp" ? "bg-green-500/15 text-green-500" : "bg-primary/10 text-primary"
                     }`}>
-                      <c.icon className={`h-5 w-5 ${c.label === "WhatsApp" ? "" : "fill-current"}`} />
+                      <c.icon className={`h-6 w-6 ${c.label === "WhatsApp" ? "" : "fill-current"}`} />
                     </div>
                     <div className="min-w-0">
-                      <div className="text-xs uppercase tracking-wider text-muted-foreground">{c.label}</div>
-                      <div className="font-medium break-all">{c.value}</div>
+                      <div className="text-xs uppercase tracking-wider text-muted-foreground mb-1">{c.label}</div>
+                      <div className="font-medium break-all text-lg">{c.value}</div>
                     </div>
                   </El>
                 );
               })}
             </div>
           </div>
-
-          {/* Full form */}
-          <Card className="lg:col-span-3 p-6 bg-card/50 border-border/50">
-            <h3 className="font-display font-bold text-lg mb-1">Send a Detailed Message</h3>
-            <p className="text-xs text-muted-foreground mb-5">
-              This form sends directly to our email. We reply as soon as possible.
-            </p>
-            {sent ? (
-              <div className="text-center py-12 space-y-3 animate-fade-up">
-                <CheckCircle2 className="h-14 w-14 text-primary mx-auto" />
-                <h3 className="text-2xl font-display font-bold">Message sent!</h3>
-                <p className="text-muted-foreground">We will be in touch very shortly.</p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid sm:grid-cols-2 gap-4">
-                  <div className="space-y-1.5">
-                    <Label htmlFor="name">Name</Label>
-                    <Input id="name" name="name" required placeholder="Your full name" />
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label htmlFor="email">Email</Label>
-                    <Input id="email" name="email" type="email" required placeholder="you@company.com" />
-                  </div>
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="company">Company or Institution (Optional)</Label>
-                  <Input id="company" name="company" placeholder="e.g. Acme Inc." />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="budget">Project budget (KES)</Label>
-                  <select id="budget" name="budget" className="flex h-10 w-full rounded-md border border-input bg-input px-3 py-2 text-sm">
-                    <option>Under 100,000</option>
-                    <option>100,000 to 500,000</option>
-                    <option>500,000 to 2,000,000</option>
-                    <option>2,000,000+</option>
-                    <option>Not sure yet</option>
-                  </select>
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="message">Tell us about your project</Label>
-                  <Textarea
-                    id="message"
-                    name="message"
-                    required
-                    rows={5}
-                    defaultValue={quoteForm.message}
-                    placeholder="Tell us about your project"
-                  />
-                </div>
-
-                <Button type="submit" size="lg" disabled={submitting}
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90 font-semibold shadow-glow h-11">
-                  {submitting ? "Sending..." : "Send Message"} <Send className="ml-2 h-4 w-4" />
-                </Button>
-
-                {/* Alternate channels below form */}
-                <div className="flex gap-3 pt-1">
-                  <a
-                    href={buildWhatsAppUrl()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-green-500/10 hover:bg-green-500/20 text-green-400 border border-green-500/30 font-semibold text-sm transition-colors"
-                  >
-                    <WhatsAppIcon className="h-4 w-4" />
-                    WhatsApp Instead
-                  </a>
-                  <a
-                    href={buildGmailUrl()}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex-1 flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-primary/10 hover:bg-primary/20 text-primary border border-primary/30 font-semibold text-sm transition-colors"
-                  >
-                    <Mail className="h-4 w-4" />
-                    Open Gmail Instead
-                  </a>
-                </div>
-              </form>
-            )}
-          </Card>
         </div>
       </section>
     </>

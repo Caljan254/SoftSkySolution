@@ -97,11 +97,11 @@ export function Footer() {
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-blue-400 shrink-0" />
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=softskysolution@gmail.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-blue-400 transition-colors">softskysolution@gmail.com</a>
+                <a href="mailto:softskysolution@gmail.com" className="text-gray-300 hover:text-blue-400 transition-colors">softskysolution@gmail.com</a>
               </li>
               <li className="flex items-center gap-2">
                 <Mail className="h-4 w-4 text-blue-400 shrink-0" />
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=supportsoftskysolution@gmail.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-blue-400 transition-colors break-all">supportsoftskysolution@gmail.com</a>
+                <a href="mailto:supportsoftskysolution@gmail.com" className="text-gray-300 hover:text-blue-400 transition-colors break-all">supportsoftskysolution@gmail.com</a>
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="h-4 w-4 text-blue-400 shrink-0" />

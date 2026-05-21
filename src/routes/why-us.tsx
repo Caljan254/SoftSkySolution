@@ -8,6 +8,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { getEmailLink } from "@/lib/utils";
 import { useState } from "react";
 import caleb1 from "@/assets/caleb-1.png";
 
@@ -38,10 +39,10 @@ const differentiators = [
   },
   {
     icon: Shield,
-    title: "12-Month Post-Launch Support",
-    desc: "Every project includes 12 months of free post-launch support, which covers bug fixes, minor adjustments, performance monitoring, and security patches. We don't disappear after deployment.",
-    stat: "12",
-    statLabel: "Months free support",
+    title: "Custom Post-Launch Support",
+    desc: "Every project includes a tailored post-launch support plan based on our specific agreement, which covers bug fixes, minor adjustments, performance monitoring, and security patches. We don't disappear after deployment.",
+    stat: "Custom",
+    statLabel: "Per agreement",
   },
   {
     icon: Lock,

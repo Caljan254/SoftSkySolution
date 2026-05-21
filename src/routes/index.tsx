@@ -1037,7 +1037,7 @@ function renderMockupContent(title: string, Icon: any) {
 function Home() {
   return (
     <>
-      {/* SLIDING IMAGES AT THE TOP - REDUCED HEIGHT */}
+      {/* SLIDING IMAGES AT THE TOP, REDUCED HEIGHT */}
       <ContinuousSlider />
 
       {/* HERO SECTION */}

@@ -23,7 +23,7 @@ type Post = {
   date: string;
   read: string;
   category: string;
-  gradient: string;
+  image: string;
 };
 
 const posts: Post[] = [
@@ -32,7 +32,7 @@ const posts: Post[] = [
     excerpt: "Email chains and WhatsApp groups can't scale. Here's how a structured ticketing system transformed how one university directorate serves thousands of students.",
     body: [
       "Public institutions in Kenya quietly handle thousands of internal requests every week, including password resets, network outages, transcripts, internship applications, and lost ID cards. Without a ticketing system, these requests live in personal inboxes, get forgotten in WhatsApp groups, and frustrate students, staff and leadership alike.",
-      "When SoftSkySolution rolled out a ticketing system for the Directorate of ICT at a Kenyan university, the goal was simple: every request gets logged, assigned, tracked and closed visibly. Average response time dropped from over 3 days to under 6 hours within the first month.",
+      "When SoftSkySolution rolled out a ticketing system for the Directorate of ICT at South Eastern Kenya University (SEKU), the goal was simple: every request gets logged, assigned, tracked and closed visibly. Average response time dropped from over 3 days to under 6 hours within the first month.",
       "The win wasn't fancy AI. It was structure: clear categories, owner assignment, service-level agreements (SLAs), and dashboards that leadership could actually read at a glance. Students saw their ticket status in real time and stopped sending duplicate emails. Officers stopped firefighting and started planning.",
       "If your institution still runs on 'send me a WhatsApp', you are leaving service quality, accountability and reputation on the table. A modern ticketing system pays for itself within a single semester.",
     ],
@@ -44,14 +44,14 @@ const posts: Post[] = [
     date: "May 10, 2026",
     read: "6 min read",
     category: "Institutional ICT",
-    gradient: "from-blue-500/30 to-cyan-500/30",
+    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&auto=format",
   },
   {
     title: "Real-Time Customer Feedback: The Quiet Superpower of Modern Offices",
     excerpt: "Annual surveys are too little, too late. Real-time, anonymous feedback that lands on the right desk in seconds is the new standard.",
     body: [
       "Most institutions still rely on annual or quarterly satisfaction surveys. By the time the results are tabulated and presented, the people who were frustrated have already moved on, and the same issues repeat next term.",
-      "Modern institutions need to know today that the cashier window has a 40-minute queue, the registration portal is throwing errors, or the cafeteria service has slipped. The SoftSkySolution feedback platform captures input from students, staff and visitors in real time, routes it intelligently to the right office, and turns it into dashboards leaders can act on.",
+      "Modern institutions need to know today that the cashier window has a 40-minute queue, the registration portal is throwing errors, or the cafeteria service has slipped. The SoftSkySolution feedback platform deployed at SEKU captures input from students, staff and visitors in real time, routes it intelligently to the right office, and turns it into dashboards leaders can act on.",
       "We deliberately keep the user interface simple: a QR code, a five-second submission, optional anonymity. Behind the scenes, the platform applies smart routing, basic sentiment scoring, and SLA tracking so nothing falls through the cracks.",
       "The result is faster fixes, happier people, and measurable service improvement that can be reported to councils, boards and accreditation bodies with confidence.",
     ],
@@ -63,7 +63,7 @@ const posts: Post[] = [
     date: "Apr 28, 2026",
     read: "5 min read",
     category: "Product",
-    gradient: "from-emerald-500/30 to-teal-500/30",
+    image: "https://images.unsplash.com/photo-1552581234-26160f608093?w=800&auto=format",
   },
   {
     title: "Building Africa's Online Marketplaces: Lessons From the Trenches",
@@ -82,7 +82,7 @@ const posts: Post[] = [
     date: "Apr 15, 2026",
     read: "7 min read",
     category: "E-commerce",
-    gradient: "from-rose-500/30 to-red-500/30",
+    image: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=800&auto=format",
   },
   {
     title: "Learning Management Systems: What Schools Actually Need vs What Vendors Sell",
@@ -101,7 +101,7 @@ const posts: Post[] = [
     date: "Mar 30, 2026",
     read: "8 min read",
     category: "EdTech",
-    gradient: "from-amber-500/30 to-orange-500/30",
+    image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=800&auto=format",
   },
   {
     title: "Securing Institutional Finance Systems: A Practical Checklist",
@@ -120,7 +120,7 @@ const posts: Post[] = [
     date: "Mar 12, 2026",
     read: "6 min read",
     category: "Security",
-    gradient: "from-purple-500/30 to-pink-500/30",
+    image: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&auto=format",
   },
   {
     title: "From Idea to Live System in 8 Weeks: My Delivery Playbook",
@@ -130,7 +130,7 @@ const posts: Post[] = [
       "Week 1 is Discovery: a structured workshop to align on goals, users, success metrics and constraints. We leave Week 1 with a one-page scope document everyone has signed.",
       "Weeks 2 and 3 are Design: low-fidelity wireframes, then clickable prototypes that real users click through. Most scope arguments are resolved here, before a single line of production code is written.",
       "Weeks 4 through 7 are Development: weekly demo Fridays where the client sees real, working software. Bugs, scope tweaks and surprises are surfaced and resolved early. No big-bang reveal.",
-      "Week 8 is Deploy: launch, monitoring, training, handover documentation, and a written 12-month support plan. We do not disappear after launch; that is when the real partnership begins.",
+      "Week 8 is Deploy: launch, monitoring, training, handover documentation, and a written post-launch support plan. We do not disappear after launch; that is when the real partnership begins.",
     ],
     takeaways: [
       "Structured discovery prevents 80% of expensive mid-project pivots.",
@@ -140,7 +140,7 @@ const posts: Post[] = [
     date: "Feb 26, 2026",
     read: "9 min read",
     category: "Process",
-    gradient: "from-indigo-500/30 to-violet-500/30",
+    image: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&auto=format",
   },
 ];
 
@@ -168,18 +168,27 @@ function Blog() {
         <div className="grid md:grid-cols-2 gap-6 max-w-6xl mx-auto">
           {posts.map((p) => (
             <Card key={p.title} className="overflow-hidden bg-card/60 border-border/50 hover:border-primary/50 transition-all hover:-translate-y-1 duration-300 flex flex-col">
-              <div className={`relative h-28 bg-gradient-to-br ${p.gradient} flex items-center justify-center p-4`}>
+              <div 
+                className="relative h-48 bg-cover bg-center flex items-start justify-start p-4 cursor-pointer"
+                style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(0,0,0,0.7)), url(${p.image})` }}
+                onClick={() => setOpenPost(p)}
+              >
                 <div className="absolute inset-0 starfield opacity-30" />
-                <span className="relative text-xs uppercase tracking-widest text-foreground/90 px-3 py-1 rounded-full bg-background/40 backdrop-blur">{p.category}</span>
+                <span className="relative text-xs uppercase tracking-widest text-white px-3 py-1 rounded-full bg-black/40 backdrop-blur border border-white/20">{p.category}</span>
               </div>
               <div className="p-6 space-y-3 flex-1 flex flex-col">
-                <h3 className="text-lg md:text-xl font-display font-bold leading-snug">{p.title}</h3>
+                <h3 
+                  className="text-lg md:text-xl font-display font-bold leading-snug cursor-pointer hover:text-primary hover:underline transition-all"
+                  onClick={() => setOpenPost(p)}
+                >
+                  {p.title}
+                </h3>
                 <p className="text-sm text-muted-foreground leading-relaxed flex-1">{p.excerpt}</p>
                 <div className="flex items-center gap-4 text-xs text-muted-foreground pt-3 border-t border-border/40">
                   <span className="flex items-center gap-1.5"><Calendar className="h-3.5 w-3.5" /> {p.date}</span>
                   <span className="flex items-center gap-1.5"><Clock className="h-3.5 w-3.5" /> {p.read}</span>
                 </div>
-                <Button onClick={() => setOpenPost(p)} variant="ghost" className="justify-start px-0 text-primary hover:text-primary hover:bg-transparent">
+                <Button onClick={() => setOpenPost(p)} variant="ghost" className="justify-start px-0 text-primary hover:text-primary hover:bg-transparent mt-2">
                   Read full insight <ArrowRight className="ml-1 h-4 w-4" />
                 </Button>
               </div>
@@ -203,8 +212,11 @@ function Blog() {
         <DialogContent className="max-w-3xl w-[95%] p-0 overflow-hidden bg-card border-border/60 shadow-2xl rounded-xl max-h-[90vh] flex flex-col z-[100]">
           {openPost && (
             <>
-              <div className={`h-24 bg-gradient-to-br ${openPost.gradient} flex items-center justify-center relative shrink-0`}>
-                <span className="text-xs uppercase tracking-widest text-foreground/90 px-3 py-1 rounded-full bg-background/40 backdrop-blur">
+              <div 
+                className="h-48 bg-cover bg-center flex items-center justify-center relative shrink-0"
+                style={{ backgroundImage: `linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.8)), url(${openPost.image})` }}
+              >
+                <span className="relative z-10 text-xs uppercase tracking-widest text-white px-3 py-1 rounded-full bg-black/40 backdrop-blur border border-white/20">
                   {openPost.category}
                 </span>
               </div>
@@ -248,3 +260,4 @@ function Blog() {
     </>
   );
 }
+

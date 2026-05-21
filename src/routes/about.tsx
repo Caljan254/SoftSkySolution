@@ -155,7 +155,7 @@ function About() {
                 <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold">
                   <Link to="/contact">Work With Me <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
-                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=softskysolution@gmail.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-primary/40 hover:bg-primary/10 text-sm font-medium">
+                <a href="mailto:softskysolution@gmail.com" className="inline-flex items-center gap-2 px-4 py-2 rounded-md border border-primary/40 hover:bg-primary/10 text-sm font-medium">
                   <Mail className="h-4 w-4" /> softskysolution@gmail.com
                 </a>
               </div>

@@ -56,7 +56,7 @@ const systemPrograms = [
     level: "Intermediate",
     shortDesc: "Create systems for hospitals, hotels, and rental properties.",
     fullDesc:
-      "Design and build complete healthcare and hospitality management platforms. This includes clinic patient records, doctor scheduling, hotel room booking engines, and rental management dashboards — all with professional UI and database design.",
+      "Design and build complete healthcare and hospitality management platforms. This includes clinic patient records, doctor scheduling, hotel room booking engines, and rental management dashboards , all with professional UI and database design.",
     skills: [
       "Hospital & Clinic Management Systems",
       "Hotel & Rental Management",
@@ -286,7 +286,7 @@ function EnrollModal({
     email: "",
     phone: "",
     category: "⚙️ System Development Training",
-    trainingTime: "Morning (8am - 12pm)",
+    trainingTime: "Morning (8am, 12pm)",
     interests: "",
   });
 
@@ -320,7 +320,7 @@ function EnrollModal({
       email: "",
       phone: "",
       category: "⚙️ System Development Training",
-      trainingTime: "Morning (8am - 12pm)",
+      trainingTime: "Morning (8am, 12pm)",
       interests: "",
     });
   };
@@ -516,9 +516,9 @@ function EnrollModal({
               boxSizing: "border-box",
             }}
           >
-            <option>Morning (8am - 12pm)</option>
-            <option>Afternoon (1pm - 5pm)</option>
-            <option>Evening (6pm - 9pm)</option>
+            <option>Morning (8am, 12pm)</option>
+            <option>Afternoon (1pm, 5pm)</option>
+            <option>Evening (6pm, 9pm)</option>
             <option>Weekends (Sat/Sun)</option>
             <option>Flexible / Custom</option>
           </select>
@@ -1043,7 +1043,7 @@ function Training() {
             <span
               style={{ color: "#e2e8f0", fontSize: "0.95rem", fontWeight: 500 }}
             >
-              ✨ Simple, Transparent, and Flexible — Designed for Your Success ✨
+              ✨ Simple, Transparent, and Flexible , Designed for Your Success ✨
             </span>
           </div>
         </div>
@@ -1143,7 +1143,7 @@ function Training() {
           </p>
           <button
             onClick={() => {
-              const subject = "Training Inquiry — SoftSkySolution";
+              const subject = "Training Inquiry , SoftSkySolution";
               const body =
                 "Hello SoftSkySolution,\n\nI am interested in one of your training programs and would like to get more information.\n\nPlease get back to me with:\n- Available schedules\n- Fee plan details\n- Training agreement\n\nThank you!";
               const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=softskysolution@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;

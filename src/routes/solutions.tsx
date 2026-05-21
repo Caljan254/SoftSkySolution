@@ -200,6 +200,20 @@ const systemSolutions = [
     features: ["Yield tracking", "Weather integration", "Farm accounting", "IoT sensors", "Supply chain"],
     highlight: "Data-driven farming decisions",
   },
+  {
+    icon: Briefcase,
+    title: "Legal & Law Firm Systems",
+    desc: "Complete case management, billing, document archiving, and client portals tailored for modern law firms.",
+    features: ["Case tracking", "Document assembly", "Time & billing", "Client portal", "Court calendar sync"],
+    highlight: "Manage 1000+ active cases securely",
+  },
+  {
+    icon: Shield,
+    title: "Insurance Management Systems",
+    desc: "Policy management, claims processing, premium billing, and customer portals for insurance providers and brokers.",
+    features: ["Policy administration", "Claims tracking", "Automated billing", "Customer portal", "Underwriting rules"],
+    highlight: "Process claims 5x faster",
+  },
 ];
 
 const webSolutions = [
