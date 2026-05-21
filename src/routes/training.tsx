@@ -290,14 +290,21 @@ function EnrollModal({
     interests: "",
   });
 
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [error, setError] = useState("");
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
   ) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+    setError("");
+
     const subject = `Training Enrollment Request: ${programTitle}`;
     const body = `
 📋 New Training Enrollment Request
@@ -311,18 +318,41 @@ function EnrollModal({
 💡 Interests/Skills: ${formData.interests}
     `.trim();
 
-    // Open Gmail compose in browser with pre-filled details
-    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=softskysolution@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.open(gmailUrl, "_blank");
-    onClose();
-    setFormData({
-      fullName: "",
-      email: "",
-      phone: "",
-      category: "⚙️ System Development Training",
-      trainingTime: "Morning (8am, 12pm)",
-      interests: "",
-    });
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          subject: subject,
+          from_name: formData.fullName,
+          replyto: formData.email,
+          message: body,
+        }),
+      });
+
+      const result = await response.json();
+      if (response.status === 200) {
+        setIsSuccess(true);
+        setFormData({
+          fullName: "",
+          email: "",
+          phone: "",
+          category: "⚙️ System Development Training",
+          trainingTime: "Morning (8am, 12pm)",
+          interests: "",
+        });
+      } else {
+        setError(result.message || "Failed to send message. Make sure to add your Web3Forms Access Key in the code.");
+      }
+    } catch (err) {
+      setError("An error occurred while sending. Please check your internet connection.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (!isOpen) return null;
@@ -370,202 +400,236 @@ function EnrollModal({
         >
           &times;
         </button>
-        <h3 style={{ marginTop: 0, color: "#1e3a5f" }}>
-          📋 Enroll in a Training Program
-        </h3>
-        <p style={{ color: "#475569", marginBottom: "20px", fontSize: "0.9rem" }}>
-          Fill in your details below. Your request will be sent directly to{" "}
-          <a
-            href="mailto:softskysolution@gmail.com"
-            style={{ color: "#2563eb", textDecoration: "none", fontWeight: 600 }}
-          >
-            softskysolution@gmail.com
-          </a>{" "}
-          via Gmail.
-        </p>
 
-        <form onSubmit={handleSubmit}>
-          <label
-            style={{
-              display: "block",
-              marginBottom: "5px",
-              fontWeight: "bold",
-              color: "#334155",
-            }}
-          >
-            👤 Full Name *
-          </label>
-          <input
-            type="text"
-            name="fullName"
-            required
-            value={formData.fullName}
-            onChange={handleChange}
-            placeholder="Your full name"
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "20px",
-              border: "1px solid #cbd5e1",
-              borderRadius: "8px",
-              boxSizing: "border-box",
-            }}
-          />
+        {isSuccess ? (
+          <div style={{ textAlign: "center", padding: "40px 20px" }}>
+            <div style={{ fontSize: "4rem", marginBottom: "10px" }}>🎉</div>
+            <h3 style={{ color: "#10b981", fontSize: "1.5rem", marginBottom: "10px" }}>
+              Congratulations!
+            </h3>
+            <p style={{ color: "#475569", fontSize: "1.1rem", lineHeight: 1.6 }}>
+              Message sent successfully.<br />
+              Please wait for feedback from our staff. We will reach out to you shortly.
+            </p>
+            <button
+              onClick={() => {
+                setIsSuccess(false);
+                onClose();
+              }}
+              style={{
+                marginTop: "30px",
+                padding: "10px 24px",
+                background: "#1e3a5f",
+                color: "white",
+                border: "none",
+                borderRadius: "8px",
+                cursor: "pointer",
+                fontWeight: "bold",
+              }}
+            >
+              Close Window
+            </button>
+          </div>
+        ) : (
+          <>
+            <h3 style={{ marginTop: 0, color: "#1e3a5f", fontSize: "1.5rem" }}>
+              📋 Enroll in a Training Program
+            </h3>
+            <p style={{ color: "#475569", marginBottom: "20px", fontSize: "0.95rem" }}>
+              Fill in your details below. Your request will be sent directly to our admissions team.
+            </p>
 
-          <label
-            style={{
-              display: "block",
-              marginBottom: "5px",
-              fontWeight: "bold",
-              color: "#334155",
-            }}
-          >
-            📧 Email *
-          </label>
-          <input
-            type="email"
-            name="email"
-            required
-            value={formData.email}
-            onChange={handleChange}
-            placeholder="your@email.com"
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "20px",
-              border: "1px solid #cbd5e1",
-              borderRadius: "8px",
-              boxSizing: "border-box",
-            }}
-          />
+            {error && (
+              <div style={{ padding: "12px", background: "#fee2e2", color: "#b91c1c", borderRadius: "8px", marginBottom: "20px", fontSize: "0.9rem" }}>
+                {error}
+              </div>
+            )}
 
-          <label
-            style={{
-              display: "block",
-              marginBottom: "5px",
-              fontWeight: "bold",
-              color: "#334155",
-            }}
-          >
-            📞 Phone Number
-          </label>
-          <input
-            type="tel"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            placeholder="+254 ..."
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "20px",
-              border: "1px solid #cbd5e1",
-              borderRadius: "8px",
-              boxSizing: "border-box",
-            }}
-          />
+            <form onSubmit={handleSubmit}>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "5px",
+                  fontWeight: "bold",
+                  color: "#334155",
+                }}
+              >
+                👤 Full Name *
+              </label>
+              <input
+                type="text"
+                name="fullName"
+                required
+                value={formData.fullName}
+                onChange={handleChange}
+                placeholder="Your full name"
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  marginBottom: "20px",
+                  border: "1px solid #cbd5e1",
+                  borderRadius: "8px",
+                  boxSizing: "border-box",
+                }}
+              />
 
-          <label
-            style={{
-              display: "block",
-              marginBottom: "5px",
-              fontWeight: "bold",
-              color: "#334155",
-            }}
-          >
-            📚 Select Training Category *
-          </label>
-          <select
-            name="category"
-            value={formData.category}
-            onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "20px",
-              border: "1px solid #cbd5e1",
-              borderRadius: "8px",
-              boxSizing: "border-box",
-            }}
-          >
-            <option>⚙️ System Development Training</option>
-            <option>🌐 Website Development Training</option>
-            <option>🎨 Graphics & Branding Training</option>
-          </select>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "5px",
+                  fontWeight: "bold",
+                  color: "#334155",
+                }}
+              >
+                📧 Email *
+              </label>
+              <input
+                type="email"
+                name="email"
+                required
+                value={formData.email}
+                onChange={handleChange}
+                placeholder="your@email.com"
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  marginBottom: "20px",
+                  border: "1px solid #cbd5e1",
+                  borderRadius: "8px",
+                  boxSizing: "border-box",
+                }}
+              />
 
-          <label
-            style={{
-              display: "block",
-              marginBottom: "5px",
-              fontWeight: "bold",
-              color: "#334155",
-            }}
-          >
-            🕐 Your Preferred Training Time *
-          </label>
-          <select
-            name="trainingTime"
-            value={formData.trainingTime}
-            onChange={handleChange}
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "20px",
-              border: "1px solid #cbd5e1",
-              borderRadius: "8px",
-              boxSizing: "border-box",
-            }}
-          >
-            <option>Morning (8am, 12pm)</option>
-            <option>Afternoon (1pm, 5pm)</option>
-            <option>Evening (6pm, 9pm)</option>
-            <option>Weekends (Sat/Sun)</option>
-            <option>Flexible / Custom</option>
-          </select>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "5px",
+                  fontWeight: "bold",
+                  color: "#334155",
+                }}
+              >
+                📞 Phone Number
+              </label>
+              <input
+                type="tel"
+                name="phone"
+                value={formData.phone}
+                onChange={handleChange}
+                placeholder="+254 ..."
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  marginBottom: "20px",
+                  border: "1px solid #cbd5e1",
+                  borderRadius: "8px",
+                  boxSizing: "border-box",
+                }}
+              />
 
-          <label
-            style={{
-              display: "block",
-              marginBottom: "5px",
-              fontWeight: "bold",
-              color: "#334155",
-            }}
-          >
-            💡 Tell us what you want to learn
-          </label>
-          <textarea
-            name="interests"
-            rows={3}
-            value={formData.interests}
-            onChange={handleChange}
-            placeholder="Which specific skills are you interested in? (e.g., E-commerce, Logo Design, School Management Systems, etc.)"
-            style={{
-              width: "100%",
-              padding: "10px",
-              marginBottom: "20px",
-              border: "1px solid #cbd5e1",
-              borderRadius: "8px",
-              boxSizing: "border-box",
-            }}
-          ></textarea>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "5px",
+                  fontWeight: "bold",
+                  color: "#334155",
+                }}
+              >
+                📚 Select Training Category *
+              </label>
+              <select
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  marginBottom: "20px",
+                  border: "1px solid #cbd5e1",
+                  borderRadius: "8px",
+                  boxSizing: "border-box",
+                }}
+              >
+                <option>⚙️ System Development Training</option>
+                <option>🌐 Website Development Training</option>
+                <option>🎨 Graphics & Branding Training</option>
+              </select>
 
-          <button
-            type="submit"
-            style={{
-              width: "100%",
-              background: "linear-gradient(135deg, #1e3a5f, #2563eb)",
-              color: "white",
-              padding: "14px",
-              border: "none",
-              borderRadius: "10px",
-              fontWeight: "bold",
-              fontSize: "1rem",
-              cursor: "pointer",
-            }}
-          >
-            ✉️ Send Training Request →
-          </button>
-        </form>
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "5px",
+                  fontWeight: "bold",
+                  color: "#334155",
+                }}
+              >
+                🕐 Your Preferred Training Time *
+              </label>
+              <select
+                name="trainingTime"
+                value={formData.trainingTime}
+                onChange={handleChange}
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  marginBottom: "20px",
+                  border: "1px solid #cbd5e1",
+                  borderRadius: "8px",
+                  boxSizing: "border-box",
+                }}
+              >
+                <option>Morning (8am, 12pm)</option>
+                <option>Afternoon (1pm, 5pm)</option>
+                <option>Evening (6pm, 9pm)</option>
+                <option>Weekends (Sat/Sun)</option>
+                <option>Flexible / Custom</option>
+              </select>
+
+              <label
+                style={{
+                  display: "block",
+                  marginBottom: "5px",
+                  fontWeight: "bold",
+                  color: "#334155",
+                }}
+              >
+                💡 Tell us what you want to learn
+              </label>
+              <textarea
+                name="interests"
+                rows={3}
+                value={formData.interests}
+                onChange={handleChange}
+                placeholder="Which specific skills are you interested in? (e.g., E-commerce, Logo Design, School Management Systems, etc.)"
+                style={{
+                  width: "100%",
+                  padding: "10px",
+                  marginBottom: "20px",
+                  border: "1px solid #cbd5e1",
+                  borderRadius: "8px",
+                  boxSizing: "border-box",
+                }}
+              ></textarea>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                style={{
+                  width: "100%",
+                  background: isSubmitting ? "#94a3b8" : "linear-gradient(135deg, #1e3a5f, #2563eb)",
+                  color: "white",
+                  padding: "14px",
+                  border: "none",
+                  borderRadius: "10px",
+                  fontWeight: "bold",
+                  fontSize: "1rem",
+                  cursor: isSubmitting ? "not-allowed" : "pointer",
+                }}
+              >
+                {isSubmitting ? "⏳ Sending Request..." : "✉️ Send Training Request →"}
+              </button>
+            </form>
+          </>
+        )}
       </div>
     </div>
   );
@@ -885,7 +949,7 @@ function ProgramCard({
             (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
           }}
         >
-          ✉️ Enroll Now via Email
+          ✉️ Enroll Now
         </button>
       </div>
       <EnrollModal
@@ -1066,12 +1130,12 @@ function Training() {
         `}</style>
         <div className="scroll-ticker">
           {[
-            "⚡ System Development","✦","🌐 Website Development","✦","🎨 Graphics Design","✦",
-            "🏷️ Digital Branding","✦","🤖 AI Chatbots","✦","🛍️ E-commerce","✦",
-            "📱 Mobile-Friendly Design","✦","✨ Logo Design","✦","🎬 Motion Graphics","✦","🗄️ Database Design","✦",
-            "⚡ System Development","✦","🌐 Website Development","✦","🎨 Graphics Design","✦",
-            "🏷️ Digital Branding","✦","🤖 AI Chatbots","✦","🛍️ E-commerce","✦",
-            "📱 Mobile-Friendly Design","✦","✨ Logo Design","✦","🎬 Motion Graphics","✦","🗄️ Database Design","✦",
+            "⚡ System Development", "✦", "🌐 Website Development", "✦", "🎨 Graphics Design", "✦",
+            "🏷️ Digital Branding", "✦", "🤖 AI Chatbots", "✦", "🛍️ E-commerce", "✦",
+            "📱 Mobile-Friendly Design", "✦", "✨ Logo Design", "✦", "🎬 Motion Graphics", "✦", "🗄️ Database Design", "✦",
+            "⚡ System Development", "✦", "🌐 Website Development", "✦", "🎨 Graphics Design", "✦",
+            "🏷️ Digital Branding", "✦", "🤖 AI Chatbots", "✦", "🛍️ E-commerce", "✦",
+            "📱 Mobile-Friendly Design", "✦", "✨ Logo Design", "✦", "🎬 Motion Graphics", "✦", "🗄️ Database Design", "✦",
           ].map((t, i) => (
             <span key={i}>{t}</span>
           ))}
