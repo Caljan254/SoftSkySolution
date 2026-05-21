@@ -330,6 +330,7 @@ function EnrollModal({
           subject: subject,
           from_name: formData.fullName,
           replyto: formData.email,
+          email: "softskysolution@gmail.com",
           message: body,
         }),
       });
@@ -508,7 +509,7 @@ function EnrollModal({
                   color: "#334155",
                 }}
               >
-                📞 Phone Number
+                📱  Phone Number
               </label>
               <input
                 type="tel"
@@ -1000,14 +1001,13 @@ function Training() {
               fontSize: "clamp(1.8rem, 5vw, 3rem)",
               marginBottom: "12px",
               fontWeight: 800,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              gap: "14px",
+              lineHeight: 1.25,
+              textAlign: "center",
             }}
           >
             🚀 Learn to{" "}
-            <span style={{ color: "#60a5fa" }}>Build &amp; Design</span> Like a Pro
+            <span style={{ color: "#60a5fa" }}>Build &amp; Design</span>
+            {" "}Like a Pro
           </h1>
           <p
             style={{
@@ -1205,14 +1205,8 @@ function Training() {
             on any program above, fill out the quick form, and we will get back to you
             immediately with your schedule, fee plan, and training agreement.
           </p>
-          <button
-            onClick={() => {
-              const subject = "Training Inquiry , SoftSkySolution";
-              const body =
-                "Hello SoftSkySolution,\n\nI am interested in one of your training programs and would like to get more information.\n\nPlease get back to me with:\n- Available schedules\n- Fee plan details\n- Training agreement\n\nThank you!";
-              const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=softskysolution@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-              window.open(gmailUrl, "_blank");
-            }}
+          <a
+            href="mailto:softskysolution@gmail.com?subject=Training%20Inquiry%20-%20SoftSkySolution&body=Hello%20SoftSkySolution%2C%0A%0AI%20am%20interested%20in%20one%20of%20your%20training%20programs%20and%20would%20like%20to%20get%20more%20information.%0A%0APlease%20get%20back%20to%20me%20with%3A%0A-%20Available%20schedules%0A-%20Fee%20plan%20details%0A-%20Training%20agreement%0A%0AThank%20you!"
             style={{
               display: "inline-flex",
               alignItems: "center",
@@ -1226,18 +1220,11 @@ function Training() {
               border: "none",
               cursor: "pointer",
               transition: "transform 0.2s, opacity 0.2s",
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.opacity = "0.88";
-              (e.currentTarget as HTMLButtonElement).style.transform = "scale(1.04)";
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLButtonElement).style.opacity = "1";
-              (e.currentTarget as HTMLButtonElement).style.transform = "scale(1)";
+              textDecoration: "none",
             }}
           >
             ✉️ Email Us Directly
-          </button>
+          </a>
         </div>
       </section>
     </div>
