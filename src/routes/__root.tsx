@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -75,14 +76,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SoftSkySolution LTD — Strategic Technology Partners" },
+      { title: "SoftSkySolution LTD | Strategic Technology Partners" },
       { name: "description", content: "World-class software development, cloud, AI & digital products built in Kenya for clients across Africa, Europe & Asia." },
       { name: "author", content: "SoftSkySolution LTD" },
-      { property: "og:title", content: "SoftSkySolution LTD — Strategic Technology Partners" },
+      { property: "og:title", content: "SoftSkySolution LTD | Strategic Technology Partners" },
       { property: "og:description", content: "World-class software development, cloud, AI & digital products built in Kenya for clients across Africa, Europe & Asia." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:title", content: "SoftSkySolution LTD — Strategic Technology Partners" },
+      { name: "twitter:title", content: "SoftSkySolution LTD | Strategic Technology Partners" },
       { name: "twitter:description", content: "World-class software development, cloud, AI & digital products built in Kenya for clients across Africa, Europe & Asia." },
       { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/85bf2943-9326-49a4-a63a-0adaf2b3091c/id-preview-0951b129--837c4272-4eab-4024-845b-1c33c73c01e4.lovable.app-1779102146105.png" },
       { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/85bf2943-9326-49a4-a63a-0adaf2b3091c/id-preview-0951b129--837c4272-4eab-4024-845b-1c33c73c01e4.lovable.app-1779102146105.png" },
@@ -117,6 +118,40 @@ function RootShell({ children }: { children: React.ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+
+  useEffect(() => {
+    // 1. Disable Right Click (Context Menu)
+    const handleContextMenu = (e: MouseEvent) => {
+      e.preventDefault();
+    };
+
+    // 2. Disable DevTools and View-Source hotkeys
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Disable F12
+      if (e.key === "F12") {
+        e.preventDefault();
+        return;
+      }
+      // Disable Ctrl+Shift+I, J, C, K
+      if (e.ctrlKey && e.shiftKey && ["I", "J", "C", "K"].includes(e.key.toUpperCase())) {
+        e.preventDefault();
+        return;
+      }
+      // Disable Ctrl+U (View Source) & Ctrl+S (Save As)
+      if (e.ctrlKey && ["U", "S"].includes(e.key.toUpperCase())) {
+        e.preventDefault();
+        return;
+      }
+    };
+
+    document.addEventListener("contextmenu", handleContextMenu);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("contextmenu", handleContextMenu);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

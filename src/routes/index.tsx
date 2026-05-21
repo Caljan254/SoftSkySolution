@@ -1,5 +1,5 @@
 import React from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState, useRef } from "react";
 import {
   ArrowRight, Code2, Cloud, Smartphone, Brain, Shield, Rocket,
@@ -9,7 +9,8 @@ import {
   GraduationCap, FileCheck, Building2, Tent, Network, Box, Landmark, Car,
   Tractor, Globe, Briefcase, CloudCog, Database, Code2 as CodeIcon, Wrench,
   Store, Layout, Newspaper, Laptop, Home as HomeIcon, Hotel, AppWindow,
-  Server, ShieldCheck, PenTool, Image as ImageIcon, MonitorPlay, Mail, Phone
+  Server, ShieldCheck, PenTool, Image as ImageIcon, MonitorPlay, Mail, Phone,
+  Send, Headset
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -35,7 +36,7 @@ import flyerIct from "@/assets/flyer-ict.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "SoftSkySolution — Modern Software, Web, AI & Cloud Solutions" },
+      { title: "SoftSkySolution | Modern Software, Web, AI & Cloud Solutions" },
       { name: "description", content: "SoftSkySolution builds modern web platforms, mobile apps, AI products, cloud systems and enterprise software for institutions and businesses across Africa." },
     ],
   }),
@@ -59,21 +60,166 @@ const stats = [
 ];
 
 const imageSlides = [
-  { img: flyerWeb, title: "Web Development", desc: "Modern, fast, scalable websites & institutional portals." },
-  { img: flyerMobile, title: "Mobile App Development", desc: "Android & iOS apps engineered to scale with your users." },
-  { img: flyerAi, title: "AI & Automation", desc: "Intelligent chatbots, LLM solutions and smart workflows." },
-  { img: flyerCloud, title: "Cloud & DevOps", desc: "AWS, GCP and Cloudflare — deploy, scale and monitor with confidence." },
-  { img: flyerSecurity, title: "Cybersecurity", desc: "Security audits, hardening and zero-trust architecture." },
-  { img: flyerEcommerce, title: "E-Commerce & Marketplaces", desc: "Online stores, multi-vendor marketplaces and M-Pesa integration." },
-  { img: flyerLms, title: "LMS & EdTech (Edusly)", desc: "Smart learning management systems for schools and colleges." },
-  { img: flyerFinance, title: "Finance Hub", desc: "Secure institutional finance, billing and payments systems." },
-  { img: flyerDesign, title: "UI / UX Design", desc: "Beautiful interfaces, brand systems and clickable prototypes." },
-  { img: flyerIct, title: "ICT Consulting & Support", desc: "Strategy, support, training and digital transformation." },
-  { img: gallery1, title: "Innovation in Action", desc: "Presenting SoftSkySolution at national innovation forums." },
-  { img: gallery3, title: "Award-Winning Excellence", desc: "Recognized for student innovation and digital transformation." },
-  { img: caleb3, title: "Visionary Leadership", desc: "Software that uplifts institutions and communities." },
-  { img: gallery2, title: "Collaborative Culture", desc: "We thrive in partnership with our clients and stakeholders." },
-  { img: heroBg, title: "Engineered for Scale", desc: "Robust systems built to grow with you." },
+  { 
+      category: "⚡ SYSTEM DEVELOPMENT", 
+      title: "AI & Smart Automation", 
+      desc: "AI Chatbots, Attendance, Booking, Appointment & Staff Management, streamlining operations.",
+      tags: ["AI Chatbot Systems", "Attendance Mgmt", "Booking Systems", "Staff Mgmt"],
+      bg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&auto=format",
+      welcome: "✨ Welcome to Smarter Business Operations"
+  },
+  { 
+      category: "📦 INVENTORY & PROCUREMENT", 
+      title: "Inventory & Procurement Systems", 
+      desc: "Real-time stock tracking, procurement lifecycles, document management & reporting.",
+      tags: ["Inventory Mgmt", "Procurement", "Doc Mgmt", "Feedback Reports"],
+      bg: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=1600&auto=format",
+      welcome: "📊 Gain Total Control Over Your Supply Chain"
+  },
+  { 
+      category: "💰 FINANCE & ACCOUNTING", 
+      title: "Finance, SACCO & Loan Systems", 
+      desc: "Complete accounting, Sacco management, loan tracking, cooperative & rental systems.",
+      tags: ["Finance & Accounting", "Sacco Mgmt", "Loan Mgmt", "Cooperative Mgmt"],
+      bg: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&auto=format",
+      welcome: "💡 Smart Finance, Zero Errors – Let's Grow Together"
+  },
+  { 
+      category: "🏥 HEALTH & HOSPITAL", 
+      title: "Hospital & Clinic Solutions", 
+      desc: "Patient records, hospital management, appointment scheduling & staff coordination.",
+      tags: ["Hospital Systems", "Clinic Mgmt", "Appointment Scheduling", "E-Health"],
+      bg: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1600&auto=format",
+      welcome: "🩺 Elevate Patient Care with Digital Excellence"
+  },
+  { 
+      category: "⛪ CHURCH & FAITH", 
+      title: "Church Management Systems", 
+      desc: "Member registration, event planning, donation tracking and online portals for churches.",
+      tags: ["Church Mgmt", "Member Registration", "Event Mgmt", "Online Voting"],
+      bg: "https://images.unsplash.com/photo-1438232992991-995b7058bbb3?w=1600&auto=format",
+      welcome: "🙏 Empowering Ministries with Modern Tools"
+  },
+  { 
+      category: "🏫 EDUCATION & E-LEARNING", 
+      title: "School & E-Learning Portals", 
+      desc: "Comprehensive school, student portal, exam, result, hostel and e-learning systems.",
+      tags: ["E-learning", "Exam Mgmt", "Result Mgmt", "Hostel Mgmt", "School Mgmt"],
+      bg: "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600&auto=format",
+      welcome: "📚 Shape Future Leaders – Digitize Your Institution"
+  },
+  { 
+      category: "🏨 HOSPITALITY & HOTEL", 
+      title: "Hotel & Rental Management", 
+      desc: "Booking engines, hotel PMS, rental property systems, transport management.",
+      tags: ["Hotel Mgmt", "Rental Mgmt", "Transport Mgmt", "Booking Reservation"],
+      bg: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&auto=format",
+      welcome: "🏆 Unleash 5-Star Guest Experiences"
+  },
+  { 
+      category: "👥 CRM & BUSINESS AUTO", 
+      title: "CRM & Business Automation", 
+      desc: "Customer relationship, asset management, multi-user dashboards, cloud systems.",
+      tags: ["CRM Systems", "Asset Mgmt", "Business Automation", "Cloud Systems"],
+      bg: "https://images.unsplash.com/photo-1552581234-26160f608093?w=1600&auto=format",
+      welcome: "🤝 Turn Leads into Loyalty – Automate & Conquer"
+  },
+  { 
+      category: "👨‍💼 PAYROLL & HR", 
+      title: "Payroll & Staff Systems", 
+      desc: "Payroll management, staff performance, leave tracking & HR dashboards.",
+      tags: ["Payroll Systems", "Staff Mgmt", "HR automation", "Multi-user Dashboard"],
+      bg: "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1600&auto=format",
+      welcome: "⭐ Empower Your Workforce, Simplify Payroll"
+  },
+  { 
+      category: "🌾 AGRICULTURE & COUNTY", 
+      title: "Farm & County Portals", 
+      desc: "Agriculture management, farm analytics, county service portals & data collection.",
+      tags: ["Agriculture/Farm Mgmt", "County Portals", "Data Collection", "IoT-ready"],
+      bg: "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?w=1600&auto=format",
+      welcome: "🌱 Grow Smarter with Agri-Tech & Public Portals"
+  },
+  { 
+      category: "📱 WEBSITE DEVELOPMENT", 
+      title: "Modern Business & E-commerce Websites", 
+      desc: "Company sites, e-commerce, school websites, real estate, portfolio & custom web apps.",
+      tags: ["Company Websites", "E-commerce", "School Websites", "Real Estate", "Landing Pages"],
+      bg: "https://images.unsplash.com/photo-1547658719-da2b51169166?w=1600&auto=format",
+      welcome: "🌍 Your Digital Presence, Perfected"
+  },
+  { 
+      category: "🛍️ ONLINE STORE & CMS", 
+      title: "Online Store & Custom Web Apps", 
+      desc: "Mobile-friendly stores, website redesign, hosting, security & maintenance.",
+      tags: ["Online Store Dev", "Web Redesign", "Hosting", "Maintenance", "Security"],
+      bg: "https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=1600&auto=format",
+      welcome: "🛒 Sell More, Worry Less – E-commerce Unleashed"
+  },
+  { 
+      category: "🎨 GRAPHICS & BRANDING", 
+      title: "Creative Digital Branding", 
+      desc: "Logo, poster, flyer, social media designs, motion graphics & animated ads.",
+      tags: ["Logo Design", "Flyer/Poster", "Motion Graphics", "Social Media Posters"],
+      bg: "https://images.unsplash.com/photo-1626785774573-4b799315345d?w=1600&auto=format",
+      welcome: "🎯 Make Heads Turn – Creative That Converts"
+  },
+  { 
+      category: "🧾 POS & RETAIL", 
+      title: "Point of Sale Systems", 
+      desc: "Retail POS, inventory sync, sales analytics & receipt management.",
+      tags: ["POS Systems", "Sales Dashboard", "Retail Inventory", "Multi-branch"],
+      bg: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=1600&auto=format",
+      welcome: "💸 Accelerate Sales, Streamline Checkout"
+  },
+  { 
+      category: "🗳️ VOTING & CONFERENCE", 
+      title: "Online Voting & Event Systems", 
+      desc: "Secure online voting, conference scheduling, event registration & management.",
+      tags: ["Online Voting", "Event Mgmt", "Conference Tools", "Registration Systems"],
+      bg: "https://images.unsplash.com/photo-1523580495863-d6dcdd28181f?w=1600&auto=format",
+      welcome: "🗳️ Democracy Redefined – Secure & Transparent"
+  },
+  { 
+      category: "📊 DATA & API INTEGRATION", 
+      title: "Database & API Services", 
+      desc: "Database design, API integrations, system maintenance & upgrades.",
+      tags: ["Database Design", "API Integration", "System Maintenance", "Upgrades"],
+      bg: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1600&auto=format",
+      welcome: "🔗 Seamless Integration, Infinite Possibilities"
+  },
+  { 
+      category: "🏢 REAL ESTATE & PROPERTY", 
+      title: "Real Estate & Rental Systems", 
+      desc: "Property listings, tenant management, rental tracking and lease agreements.",
+      tags: ["Real Estate Websites", "Rental Mgmt", "Lease Tracking", "Tenant Portal"],
+      bg: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&auto=format",
+      welcome: "🏡 Unlock Real Estate Potential – Digital Solutions"
+  },
+  { 
+      category: "📈 BUSINESS DASHBOARD", 
+      title: "Multi-User Dashboards & Analytics", 
+      desc: "Role-based dashboards, KPI tracking, business intelligence tools.",
+      tags: ["Multi-user Dashboard", "Analytics", "Cloud-based", "Reporting Systems"],
+      bg: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1600&auto=format",
+      welcome: "📊 Data-Driven Decisions – Real-Time Insights"
+  },
+  { 
+      category: "✝️ CHURCH & SACCO WEBSITES", 
+      title: "Niche Institutional Websites", 
+      desc: "Sacco websites, church portals, NGO platforms, event and ministry sites.",
+      tags: ["Sacco Websites", "Church Websites", "NGO Websites", "Personal Branding"],
+      bg: "https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1600&auto=format",
+      welcome: "🌟 Digital Homes for Faith & Finance"
+  },
+  { 
+      category: "🔧 SYSTEM MAINTENANCE", 
+      title: "Maintenance, Security & Upgrades", 
+      desc: "24/7 monitoring, system upgrades, security patches & performance tuning.",
+      tags: ["System Maintenance", "Security", "Performance", "Cloud Deployment"],
+      bg: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1600&auto=format",
+      welcome: "🛡️ Always Secure, Always Reliable"
+  }
 ];
 
 const digitalFlyers = [
@@ -137,86 +283,202 @@ function StatCard({ value, suffix, label }: { value: number; suffix: string; lab
 
 // ─── Reduced-height hero slider ────────────────────────────────────────────────
 function ContinuousSlider() {
+  const navigate = useNavigate();
   const all = imageSlides;
   const [current, setCurrent] = useState(0);
-  const [prev, setPrev] = useState<number | null>(null);
-  const SLIDE_DURATION = 3500;
-  const TRANSITION_MS = 900;
+  const [paused, setPaused] = useState(false);
+  const totalSlides = all.length;
+  const SLIDE_DURATION = 6000;
 
+  // Touch & Swipe states
+  const touchStartX = useRef(0);
+  const mouseDownX = useRef(0);
+
+  // Auto-sliding effect
   useEffect(() => {
-    const id = setInterval(() => {
-      setCurrent(c => {
-        const n = (c + 1) % all.length;
-        setPrev(c);
-        setTimeout(() => setPrev(null), TRANSITION_MS);
-        return n;
-      });
+    if (paused) return;
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % totalSlides);
     }, SLIDE_DURATION);
-    return () => clearInterval(id);
-  }, []);
+    return () => clearInterval(interval);
+  }, [paused, totalSlides]);
 
-  const cap = (i: number) => (
-    <div className="absolute bottom-6 left-6 right-6 md:left-12 md:right-12 z-20">
-      <div className="max-w-2xl">
-        <div className="inline-block px-3 py-0.5 rounded-full bg-blue-500/30 border border-blue-400/40 text-blue-200 text-[10px] font-semibold tracking-widest uppercase mb-2 backdrop-blur-sm">
-          SoftSkySolution
-        </div>
-        <h2 className="text-2xl md:text-4xl font-extrabold text-white leading-tight drop-shadow-2xl mb-1">
-          {all[i].title}
-        </h2>
-        <p className="text-white/70 text-xs md:text-base leading-relaxed hidden sm:block">
-          {all[i].desc}
-        </p>
-      </div>
-    </div>
-  );
+  function handleConnectClick(serviceTitle: string) {
+    navigate({
+      to: "/contact",
+      search: { service: serviceTitle }
+    });
+  }
+
+  function handleReachUsClick(serviceTitle: string) {
+    navigate({
+      to: "/contact",
+      search: { service: serviceTitle }
+    });
+  }
+
+  // Swipe / Drag Handlers
+  const handleTouchStart = (e: React.TouchEvent) => {
+    touchStartX.current = e.changedTouches[0].screenX;
+    setPaused(true);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touchEndX = e.changedTouches[0].screenX;
+    const diff = touchEndX - touchStartX.current;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        setCurrent((prev) => (prev - 1 + totalSlides) % totalSlides);
+      } else {
+        setCurrent((prev) => (prev + 1) % totalSlides);
+      }
+    }
+    setPaused(false);
+  };
+
+  const handleMouseDown = (e: React.MouseEvent) => {
+    mouseDownX.current = e.clientX;
+    setPaused(true);
+  };
+
+  const handleMouseUp = (e: React.MouseEvent) => {
+    if (mouseDownX.current === 0) return;
+    const diff = e.clientX - mouseDownX.current;
+    if (Math.abs(diff) > 60) {
+      if (diff > 0) {
+        setCurrent((prev) => (prev - 1 + totalSlides) % totalSlides);
+      } else {
+        setCurrent((prev) => (prev + 1) % totalSlides);
+      }
+    }
+    mouseDownX.current = 0;
+    setPaused(false);
+  };
 
   return (
-    <section className="relative w-full overflow-hidden border-b border-white/5 h-[65vh] md:h-[55vh]">
+    <section className="relative w-full overflow-hidden border-b border-white/5 h-[62vh] lg:h-[82vh] bg-[#000]">
       <style dangerouslySetInnerHTML={{
         __html: `
-        @keyframes slide-in  { from { transform: translateX(100%); } to { transform: translateX(0%); } }
-        @keyframes slide-out { from { transform: translateX(0%);   } to { transform: translateX(-100%); } }
+        .carousel-track {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            will-change: transform;
+            height: 100%;
+        }
+        .carousel-slide {
+            flex: 0 0 100%;
+            height: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+        }
+        .carousel-slide::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.55) 50%, rgba(0,0,0,0.2) 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            padding: 3rem;
+            color: white;
+            max-width: 800px;
+            width: 100%;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
         @keyframes grow-bar  { from { width: 0%; } to { width: 100%; } }
       `}} />
 
       {/* Progress bar */}
-      <div className="absolute top-0 left-0 right-0 h-0.5 z-50 bg-white/5">
-        <div key={current} className="h-full bg-blue-500"
-          style={{ animation: `grow-bar ${SLIDE_DURATION}ms linear forwards` }} />
+      <div className="absolute top-0 left-0 right-0 h-1 z-50 bg-white/5">
+        <div key={current + (paused ? "-paused" : "-active")} className="h-full bg-blue-500"
+          style={{ animation: paused ? "none" : `grow-bar ${SLIDE_DURATION}ms linear forwards` }} />
       </div>
 
-      {/* Exiting slide */}
-      {prev !== null && (
-        <div key={`out-${prev}`} className="absolute inset-0"
-          style={{ zIndex: 1, animation: `slide-out ${TRANSITION_MS}ms cubic-bezier(0.77,0,0.175,1) forwards` }}>
-          <img src={all[prev].img} alt={all[prev].title} className="absolute inset-0 w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
-          {cap(prev)}
+      <div 
+        className="w-full h-full cursor-grab active:cursor-grabbing overflow-hidden"
+        onMouseEnter={() => setPaused(true)}
+        onMouseLeave={() => setPaused(false)}
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleTouchEnd}
+        onMouseDown={handleMouseDown}
+        onMouseUp={handleMouseUp}
+      >
+        <div 
+          className="carousel-track" 
+          style={{ transform: `translateX(-${current * 100}%)` }}
+        >
+          {all.map((slide, idx) => (
+            <div 
+              key={idx}
+              className="carousel-slide"
+              style={{ 
+                backgroundImage: `url('${slide.bg}')`,
+                backgroundPosition: 'center 30%'
+              }}
+            >
+              <div className="slide-content mb-8 md:mb-12 md:pl-16">
+                {/* Welcome Text */}
+                <div className="inline-block px-3.5 py-1 rounded-full bg-black/50 border border-white/10 text-yellow-300 text-xs md:text-sm font-semibold tracking-wider mb-3 backdrop-blur-sm">
+                  {slide.welcome}
+                </div>
+                <br />
+                {/* Category Badge */}
+                <div className="inline-block px-3 py-1 rounded-full bg-white/15 text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 backdrop-blur-md border border-white/5">
+                  {slide.category}
+                </div>
+                {/* Slide Title */}
+                <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight drop-shadow-2xl mb-3 font-display">
+                  {slide.title}
+                </h2>
+                {/* Description */}
+                <p className="text-white/90 text-sm md:text-lg leading-relaxed mb-5 max-w-xl">
+                  {slide.desc}
+                </p>
+                {/* Tags */}
+                <div className="flex flex-wrap gap-2 mb-6">
+                  {slide.tags.map((tag, tIdx) => (
+                    <span key={tIdx} className="bg-white/10 border border-white/10 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-white/90">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+                {/* CTA Buttons */}
+                <div className="flex flex-wrap gap-3">
+                  <button 
+                    onClick={() => handleConnectClick(slide.title)}
+                    className="inline-flex items-center gap-2 bg-[#2c5a6e] hover:bg-[#1e3f4e] text-white px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 cursor-pointer shadow-lg"
+                  >
+                    <Send className="h-4.5 w-4.5" /> Connect with Us
+                  </button>
+                  <button 
+                    onClick={() => handleReachUsClick(slide.title)}
+                    className="inline-flex items-center gap-2 bg-transparent border-2 border-white/90 hover:bg-white/20 text-white px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 backdrop-blur-sm cursor-pointer"
+                  >
+                    <Headset className="h-4.5 w-4.5" /> Reach Us / Get Quote
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
-      )}
-
-      {/* Entering slide */}
-      <div key={`in-${current}`} className="absolute inset-0"
-        style={{ zIndex: 2, animation: `slide-in ${TRANSITION_MS}ms cubic-bezier(0.77,0,0.175,1) forwards` }}>
-        <img src={all[current].img} alt={all[current].title} className="absolute inset-0 w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-transparent" />
-        {cap(current)}
       </div>
 
       {/* Dots */}
-      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-50">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2.5 z-50 bg-black/60 backdrop-blur-md px-4 py-2 rounded-full border border-white/5">
         {all.map((_, i) => (
           <button key={i}
-            onClick={() => { setPrev(current); setTimeout(() => setPrev(null), TRANSITION_MS); setCurrent(i); }}
-            className="rounded-full transition-all duration-300"
-            style={{ width: i === current ? 20 : 5, height: 5, background: i === current ? "#3b82f6" : "rgba(255,255,255,0.25)" }} />
+            onClick={() => { setCurrent(i); setPaused(true); setTimeout(() => setPaused(false), 2000); }}
+            className="rounded-full transition-all duration-300 h-2.5 cursor-pointer"
+            style={{ width: i === current ? 26 : 10, background: i === current ? "#2c5a6e" : "rgba(255,255,255,0.35)" }} />
         ))}
       </div>
 
-      <div className="absolute top-4 right-4 z-50 text-white/30 font-mono text-[10px]">
-        {String(current + 1).padStart(2, "0")} / {String(all.length).padStart(2, "0")}
-      </div>
     </section>
   );
 }
@@ -784,9 +1046,8 @@ function Home() {
               Now accepting new projects
             </div>
 
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-display font-bold leading-[1.05]">
-              I build <span className="text-gradient-primary">bold software</span><br />
-              for ambitious teams.
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-display font-bold leading-[1.1] tracking-tight">
+              I build <span className="text-gradient-primary">bold software</span> for ambitious teams.
             </h1>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">

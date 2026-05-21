@@ -7,8 +7,8 @@ import { Card } from "@/components/ui/card";
 export const Route = createFileRoute("/portfolio")({
   head: () => ({
     meta: [
-      { title: "Portfolio — SoftSkySolution" },
-      { name: "description", content: "Selected projects delivered by SoftSkySolution — institutional websites, learning management systems, financial systems, donation platforms and more." },
+      { title: "Portfolio | SoftSkySolution" },
+      { name: "description", content: "Selected projects delivered by SoftSkySolution, including institutional websites, learning management systems, financial systems, donation platforms, and more." },
     ],
   }),
   component: Portfolio,
@@ -153,9 +153,13 @@ function Portfolio() {
                     <span key={t} className="px-2 py-0.5 text-xs rounded-md bg-primary/10 text-primary">{t}</span>
                   ))}
                 </div>
-                <button className="flex items-center gap-2 text-sm text-primary font-medium hover:gap-3 transition-all">
+                <Link
+                  to="/contact"
+                  search={{ service: `Case Study: ${p.title}` }}
+                  className="flex items-center gap-2 text-sm text-primary font-medium hover:gap-3 transition-all cursor-pointer w-fit mt-1"
+                >
                   Request Case Study <ExternalLink className="h-3.5 w-3.5" />
-                </button>
+                </Link>
               </div>
             </Card>
           ))}

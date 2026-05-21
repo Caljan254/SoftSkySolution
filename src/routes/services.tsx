@@ -9,7 +9,7 @@ import { Card } from "@/components/ui/card";
 export const Route = createFileRoute("/services")({
   head: () => ({
     meta: [
-      { title: "Services — SoftSkySolution" },
+      { title: "Services | SoftSkySolution" },
       { name: "description", content: "Full-stack software engineering: web, mobile, cloud, AI, cybersecurity, branding and digital strategy." },
     ],
   }),

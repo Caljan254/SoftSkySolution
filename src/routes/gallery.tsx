@@ -10,7 +10,7 @@ import gallery3 from "@/assets/gallery-3.png";
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "Gallery — SoftSkySolution" },
+      { title: "Gallery | SoftSkySolution" },
       { name: "description", content: "Photo gallery of SoftSkySolution events, leadership moments and recognition." },
     ],
   }),
