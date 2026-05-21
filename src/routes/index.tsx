@@ -356,7 +356,7 @@ function ContinuousSlider() {
   };
 
   return (
-    <section className="relative w-full overflow-hidden border-b border-white/5 h-[62vh] lg:h-[82vh] bg-[#000]">
+    <section className="relative w-full overflow-hidden border-b border-white/5 h-[68vh] sm:h-[65vh] lg:h-[82vh] bg-[#000]">
       <style dangerouslySetInnerHTML={{
         __html: `
         .carousel-track {
@@ -385,11 +385,16 @@ function ContinuousSlider() {
         .slide-content {
             position: relative;
             z-index: 2;
-            padding: 3rem;
+            padding: 1.25rem;
             color: white;
             max-width: 800px;
             width: 100%;
             text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+        }
+        @media (min-width: 768px) {
+            .slide-content {
+                padding: 3rem;
+            }
         }
         @keyframes grow-bar  { from { width: 0%; } to { width: 100%; } }
       `}} />
@@ -422,26 +427,26 @@ function ContinuousSlider() {
                 backgroundPosition: 'center 30%'
               }}
             >
-              <div className="slide-content mb-8 md:mb-12 md:pl-16">
-                {/* Welcome Text */}
-                <div className="inline-block px-3.5 py-1 rounded-full bg-black/50 border border-white/10 text-yellow-300 text-xs md:text-sm font-semibold tracking-wider mb-3 backdrop-blur-sm">
-                  {slide.welcome}
-                </div>
-                <br />
-                {/* Category Badge */}
-                <div className="inline-block px-3 py-1 rounded-full bg-white/15 text-white text-[10px] md:text-xs font-bold tracking-widest uppercase mb-4 backdrop-blur-md border border-white/5">
-                  {slide.category}
+              <div className="slide-content mb-10 sm:mb-12 md:pl-16">
+                {/* Welcome Text & Category Badge Grouped */}
+                <div className="flex flex-col items-start gap-2 mb-3 md:mb-4">
+                  <div className="inline-block px-3 py-0.5 md:px-3.5 md:py-1 rounded-full bg-black/50 border border-white/10 text-yellow-300 text-[10px] md:text-sm font-semibold tracking-wider backdrop-blur-sm">
+                    {slide.welcome}
+                  </div>
+                  <div className="inline-block px-2.5 py-0.5 md:px-3 md:py-1 rounded-full bg-white/15 text-white text-[9px] md:text-xs font-bold tracking-widest uppercase backdrop-blur-md border border-white/5">
+                    {slide.category}
+                  </div>
                 </div>
                 {/* Slide Title */}
-                <h2 className="text-3xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight drop-shadow-2xl mb-3 font-display">
+                <h2 className="text-2xl sm:text-3xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight drop-shadow-2xl mb-2 md:mb-3 font-display">
                   {slide.title}
                 </h2>
                 {/* Description */}
-                <p className="text-white/90 text-sm md:text-lg leading-relaxed mb-5 max-w-xl">
+                <p className="text-white/90 text-xs sm:text-sm md:text-lg leading-relaxed mb-3 md:mb-5 max-w-xl line-clamp-2 sm:line-clamp-none">
                   {slide.desc}
                 </p>
                 {/* Tags */}
-                <div className="flex flex-wrap gap-2 mb-6">
+                <div className="hidden sm:flex flex-wrap gap-2 mb-6">
                   {slide.tags.map((tag, tIdx) => (
                     <span key={tIdx} className="bg-white/10 border border-white/10 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-medium text-white/90">
                       {tag}
@@ -449,18 +454,22 @@ function ContinuousSlider() {
                   ))}
                 </div>
                 {/* CTA Buttons */}
-                <div className="flex flex-wrap gap-3">
+                <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-2 md:gap-3 w-full max-w-md sm:max-w-none">
                   <button 
                     onClick={() => handleConnectClick(slide.title)}
-                    className="inline-flex items-center gap-2 bg-[#2c5a6e] hover:bg-[#1e3f4e] text-white px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 cursor-pointer shadow-lg"
+                    className="inline-flex items-center justify-center gap-1.5 bg-[#2c5a6e] hover:bg-[#1e3f4e] text-white px-3 py-2 sm:px-6 sm:py-3 rounded-full font-bold text-[11px] sm:text-base transition-all duration-300 cursor-pointer shadow-lg w-full sm:w-auto"
                   >
-                    <Send className="h-4.5 w-4.5" /> Connect with Us
+                    <Send className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
+                    <span className="hidden sm:inline">Connect with Us</span>
+                    <span className="inline sm:hidden">Connect</span>
                   </button>
                   <button 
                     onClick={() => handleReachUsClick(slide.title)}
-                    className="inline-flex items-center gap-2 bg-transparent border-2 border-white/90 hover:bg-white/20 text-white px-6 py-3 rounded-full font-bold text-sm md:text-base transition-all duration-300 backdrop-blur-sm cursor-pointer"
+                    className="inline-flex items-center justify-center gap-1.5 bg-transparent border border-white/90 hover:bg-white/20 text-white px-3 py-2 sm:px-6 sm:py-3 rounded-full font-bold text-[11px] sm:text-base transition-all duration-300 backdrop-blur-sm cursor-pointer w-full sm:w-auto"
                   >
-                    <Headset className="h-4.5 w-4.5" /> Reach Us / Get Quote
+                    <Headset className="h-3.5 w-3.5 sm:h-4.5 sm:w-4.5" />
+                    <span className="hidden sm:inline">Reach Us / Get Quote</span>
+                    <span className="inline sm:hidden">Get Quote</span>
                   </button>
                 </div>
               </div>

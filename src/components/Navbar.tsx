@@ -31,7 +31,7 @@ export function Navbar() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-400"></span>
             </span>
-            <span>We are Available 24/7 & Everyday — Get Feedback Immediately!</span>
+            <span>We are Available 24/7 — Get Feedback Immediately!</span>
           </div>
           <div className="flex items-center flex-wrap gap-x-3 gap-y-1 justify-center md:pl-4">
             <a
