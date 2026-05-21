@@ -1171,62 +1171,6 @@ function Training() {
         programCountLabel="3 Comprehensive Programs"
         bgColor="#f0f4f8"
       />
-
-      {/* ── CTA ── */}
-      <section
-        style={{
-          background: "linear-gradient(135deg, #0f172a, #1e3a5f)",
-          padding: "70px 20px",
-          textAlign: "center",
-        }}
-      >
-        <div style={{ maxWidth: "800px", margin: "0 auto" }}>
-          <div style={{ fontSize: "3rem", marginBottom: "16px" }}>🚀</div>
-          <h2
-            style={{
-              color: "white",
-              fontSize: "2.2rem",
-              marginBottom: "15px",
-              fontWeight: 700,
-            }}
-          >
-            Ready to Start Learning?
-          </h2>
-          <p
-            style={{
-              color: "#cbd5e1",
-              fontSize: "1.1rem",
-              marginBottom: "35px",
-              lineHeight: 1.6,
-            }}
-          >
-            Click{" "}
-            <strong style={{ color: "#60a5fa" }}>&quot;Enroll Now via Email&quot;</strong>{" "}
-            on any program above, fill out the quick form, and we will get back to you
-            immediately with your schedule, fee plan, and training agreement.
-          </p>
-          <a
-            href="mailto:softskysolution@gmail.com?subject=Training%20Inquiry%20-%20SoftSkySolution&body=Hello%20SoftSkySolution%2C%0A%0AI%20am%20interested%20in%20one%20of%20your%20training%20programs%20and%20would%20like%20to%20get%20more%20information.%0A%0APlease%20get%20back%20to%20me%20with%3A%0A-%20Available%20schedules%0A-%20Fee%20plan%20details%0A-%20Training%20agreement%0A%0AThank%20you!"
-            style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "10px",
-              background: "#ea4335",
-              color: "white",
-              padding: "14px 32px",
-              borderRadius: "12px",
-              fontWeight: 700,
-              fontSize: "1rem",
-              border: "none",
-              cursor: "pointer",
-              transition: "transform 0.2s, opacity 0.2s",
-              textDecoration: "none",
-            }}
-          >
-            ✉️ Email Us Directly
-          </a>
-        </div>
-      </section>
     </div>
   );
 }
